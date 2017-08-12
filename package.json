@@ -20,7 +20,8 @@
     "transactions-redux-reselector": "latest",
     "pluralize": "^3.0.0",
     "prop-types": "^15.5.4",
-    "react": "15.5.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "shortid": "^2.2.6"
@@ -47,5 +48,5 @@
     "dev-watch-js": "nodemon --watch src --ignore src/styles --exec \"npm run compile\"",
     "dev-watch": "concurrently \"npm run dev-watch-js\" \"npm run dev-watch-sass\""
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
