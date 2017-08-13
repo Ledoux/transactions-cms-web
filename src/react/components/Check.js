@@ -8,11 +8,11 @@ const { assignPipeline,
   getTransactionsProps,
   closeModal
 } = require('transactions-interface-state').default
+const { Warning } = require('transactions-interface-web').default
 import { mergeReselector } from 'transactions-redux-reselector'
 import pluralize from 'pluralize'
 
 import Card from './Card'
-import Warning from './Warning'
 
 const getDefaultIsEmptyForm = function () {
   return false

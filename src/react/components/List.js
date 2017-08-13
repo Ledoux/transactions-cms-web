@@ -3,10 +3,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getNormalizerEntities } from 'transactions-redux-normalizer'
 const { getTransactionsProps } = require('transactions-interface-state').default
+const { Warning } = require('transactions-interface-web').default
 
 import Item from './Item'
 import Search from './Search'
-import Warning from './Warning'
 
 const List = (props) => {
   const { collectionName,

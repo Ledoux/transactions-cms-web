@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { requestTransactions } from 'transactions-redux-request'
 const { getTransactionsProps } = require('transactions-interface-state').default
+const { Button } = require('transactions-interface-web').default
 
-import Button from './Button'
 import List from './List'
 import Search from './Search'
 

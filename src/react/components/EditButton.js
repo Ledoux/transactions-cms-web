@@ -1,7 +1,7 @@
 import React from 'react'
-
-import Button from './Button'
-import Icon from './Icon'
+const { Button,
+  Icon
+} = require('transactions-interface-web').default
 
 const EditButton = ({ history }) => {
   return  (

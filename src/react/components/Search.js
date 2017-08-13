@@ -2,8 +2,7 @@ import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { assignReselectorFilter } from 'transactions-redux-reselector'
-
-import IconButton from './IconButton'
+const { IconButton } = require('transactions-interface-web').default
 
 const AND_SEPARATOR = ' '
 const SEPARATOR = ':'
