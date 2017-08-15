@@ -2,8 +2,8 @@ import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { requestTransactions } from 'transactions-redux-request'
-const { getTransactionsProps } = require('transactions-interface-state').default
-const { Button } = require('transactions-interface-web').default
+import { getTransactionsProps } from 'transactions-interface-state'
+import { Button } from 'transactions-interface-web'
 
 import List from './List'
 import Search from './Search'

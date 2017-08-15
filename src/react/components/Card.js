@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-const { getFormEntity,
+import { getTransactionsProps } from 'transactions-interface-state'
+import { getFormEntity,
   getNewForm,
-  getTransactionsProps,
   resetForm,
   setForm
-} = require('transactions-interface-state').default
+} from 'transactions-cms-state'
 import { getNotStoredOptions } from 'transactions-redux-normalizer'
 import shortid from 'shortid'
 

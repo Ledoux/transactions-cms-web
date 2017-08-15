@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import DebounceInput from 'react-debounce-input';
 import { connect } from 'react-redux'
-const { deleteFormEntity,
+import { deleteFormEntity,
   mergeForm,
   mergeFormEntity
-} = require('transactions-interface-state').default
+} from 'transactions-cms-state'
 import { assignReselectorFilter } from 'transactions-redux-reselector'
 
 class InputForm extends Component {

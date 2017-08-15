@@ -2,8 +2,8 @@ import classnames from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
 import { getNormalizerEntities } from 'transactions-redux-normalizer'
-const { getTransactionsProps } = require('transactions-interface-state').default
-const { Warning } = require('transactions-interface-web').default
+import { getTransactionsProps } from 'transactions-interface-state'
+import { Warning } from 'transactions-interface-web'
 
 import Item from './Item'
 import Search from './Search'

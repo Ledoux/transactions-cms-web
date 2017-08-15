@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-const { assignPipeline,
-  getAutomaticSlug,
-  getFormEntity,
-  getPipelineEntities,
-  getPipelineEntity,
+import { getAutomaticSlug,
   getTransactionsProps,
   closeModal
-} = require('transactions-interface-state').default
-const { Warning } = require('transactions-interface-web').default
+} from 'transactions-interface-state'
+import { assignPipeline,
+  getFormEntity,
+  getPipelineEntities,
+  getPipelineEntity
+} from 'transactions-cms-state'
+import { Warning } from 'transactions-interface-web'
 import { mergeReselector } from 'transactions-redux-reselector'
 import pluralize from 'pluralize'
 

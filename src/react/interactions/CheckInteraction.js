@@ -1,5 +1,5 @@
 import React from 'react'
-const { IconButton } = require('transactions-interface-web').default
+import { IconButton } from 'transactions-interface-web'
 
 const CheckInteraction = ({ entityName,
   history,

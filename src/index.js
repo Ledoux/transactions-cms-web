@@ -1,14 +1,6 @@
-const CardsByComponentName = require('./react/cards').default
-const ComponentsByComponentName = require('./react/components').default
-const InteractionsByComponentName = require('./react/interactions').default
-const ItemsByComponentName = require('./react/items').default
-const PagesByComponentName = require('./react/pages').default
-
-const transactionsCmsWeb = Object.assign({},
-  CardsByComponentName,
-  ComponentsByComponentName,
-  InteractionsByComponentName,
-  ItemsByComponentName,
-  PagesByComponentName
-)
-export default transactionsCmsWeb
+export * from './react/cards'
+export * from './react/components'
+export * from './react/dashboards'
+export * from './react/interactions'
+export * from './react/items'
+export * from './react/pages'

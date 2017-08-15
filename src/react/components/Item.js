@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import React from 'react'
-const { getTransactionsProps } = require('transactions-interface-state').default
+import { getTransactionsProps } from 'transactions-interface-state'
 
-const Item = (props) => {
+const Item = props => {
   const { BottomInteractionComponent,
     className,
     collectionName,

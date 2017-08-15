@@ -1,11 +1,11 @@
 import pluralize from 'pluralize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-const { closeModal,
+import { closeModal,
   getAutomaticCollectionName,
-  setAuthorizationSelectedMode,
   showModal
-} = require('transactions-interface-state').default
+} from 'transactions-interface-state'
+import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
 
 import Check from '../components/Check'
 import Explore from '../components/Explore'

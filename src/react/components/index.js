@@ -9,7 +9,7 @@ import List from './List'
 import Search from './Search'
 import SubmitButton from './SubmitButton'
 
-const ComponentsByComponentName = { Card,
+export { Card,
   Check,
   Control,
   EditButton,
@@ -20,4 +20,3 @@ const ComponentsByComponentName = { Card,
   Search,
   SubmitButton
 }
-export default ComponentsByComponentName

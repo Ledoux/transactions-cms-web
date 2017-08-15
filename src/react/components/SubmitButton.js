@@ -1,15 +1,16 @@
 import classnames from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
-const { getFormPutOptions,
-  getUpdatedSearchString,
-  resetForm,
+import { getFormPutOptions,
+  resetForm
+} from 'transactions-cms-state'
+import { getUpdatedSearchString,
   showModal
-} = require('transactions-interface-state').default
-const { Button,
+} from 'transactions-interface-state'
+import { Button,
   Confirmation,
   Icon
-} = require('transactions-interface-web').default
+} from 'transactions-interface-web'
 
 const SubmitButton = ({ collectionName,
   ConfirmationComponent,

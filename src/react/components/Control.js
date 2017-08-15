@@ -1,7 +1,7 @@
 import React from 'react'
-const { SubmitButton } = require('transactions-interface-web').default
 
 import EditButton from './EditButton'
+import SubmitButton from './SubmitButton'
 
 const Control = ({ getFilteredElements,
   getIsEmptyForm,
