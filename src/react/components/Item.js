@@ -7,13 +7,14 @@ const Item = props => {
     className,
     collectionName,
     ContentComponent,
+    entity,
+    entityName,
     exploreState,
-    interactionExtra,
+    extraProps,
+    interactionExtraProps,
     isLast,
     isShrinked,
     isSmall,
-    entity,
-    entityName,
     LeftInteractionComponent,
     onExploreChange,
     RightInteractionComponent,
@@ -35,7 +36,7 @@ const Item = props => {
           exploreState={exploreState}
           onExploreChange={onExploreChange}
           {...entity}
-          {...interactionExtra}
+          {...interactionExtraProps}
           {...transactionsProps}
         />
       </div>)
@@ -48,6 +49,7 @@ const Item = props => {
         ContentComponent && <ContentComponent
           collectionName={collectionName}
           {...entity}
+          {...extraProps}
           {...transactionsProps}
         />
       }
@@ -67,7 +69,7 @@ const Item = props => {
           exploreState={exploreState}
           onExploreChange={onExploreChange}
           {...entity}
-          {...interactionExtra}
+          {...interactionExtraProps}
           {...transactionsProps}
         />
       </div>)
@@ -80,7 +82,7 @@ const Item = props => {
           exploreState={exploreState}
           onExploreChange={onExploreChange}
           {...entity}
-          {...interactionExtra}
+          {...interactionExtraProps}
           {...transactionsProps}
         />
       </div>)

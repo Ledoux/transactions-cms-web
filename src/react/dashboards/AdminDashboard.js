@@ -5,7 +5,6 @@ import { Title } from 'transactions-interface-web'
 import Explore from '../components/Explore'
 
 const usersExploreOptions = [{ collectionName: 'users',
-  entityName: 'user',
   maxDisplayCount: 3,
   // RightInteractionComponent: UserInteraction
 }]

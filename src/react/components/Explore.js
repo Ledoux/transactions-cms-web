@@ -38,6 +38,9 @@ class Explore extends Component {
         { tag: label ? `${label}-explore` : 'explore' }))
     }
   }
+  _onExploreChange (state) {
+    this.setState(state)
+  }
   componentDidMount () {
     this.handleRequestContent()
   }
@@ -48,20 +51,15 @@ class Explore extends Component {
       && options && options.length === 1) {
       this.setState({selectedIndexes: [0]})
     }
-    // look for new backend request
-    if (prevProps.options !== options) {
-      // this.handleRequestContent()
-    }
-  }
-  _onExploreChange (state) {
-    this.setState(state)
   }
   render () {
-    const { getFilteredElements,
+    const { extra,
+      getFilteredElements,
       getRequestQuery,
       inputTemplate,
       interactions,
       isAdd,
+      isSearch,
       isShrinked,
       isSmall,
       label,
@@ -78,21 +76,25 @@ class Explore extends Component {
     const isLists = selectedOptions.length > 0
     const transactionsProps = getTransactionsProps(this.props)
     return (<div className='explore'>
-      <div className={classnames('explore__search', {
-        'explore__search--shrinked': isShrinked
-      })}>
-        <Search
-          exploreState={this.state}
-          getRequestQuery={getRequestQuery}
-          interactions={interactions}
-          inputTemplate={inputTemplate}
-          isAdd
-          label={label}
-          onExploreChange={this.onExploreChange}
-          options={selectedOptions}
-          placeholder={placeholder}
-        />
-      </div>
+      {
+        isSearch && (
+          <div className={classnames('explore__search', {
+              'explore__search--shrinked': isShrinked
+          })}>
+            <Search
+              exploreState={this.state}
+              getRequestQuery={getRequestQuery}
+              interactions={interactions}
+              inputTemplate={inputTemplate}
+              isAdd
+              label={label}
+              onExploreChange={this.onExploreChange}
+              options={selectedOptions}
+              placeholder={placeholder}
+            />
+          </div>
+        )
+      }
       <div className='explore__collections flex flex-wrap'>
         {
           isSelection && options.map(({collectionName}, index) => {
@@ -146,6 +148,7 @@ class Explore extends Component {
 }
 
 Explore.defaultProps = {
+  isSearch: true,
   requestTransactions
 }
 
