@@ -14,7 +14,6 @@ import { Button,
 
 const SubmitButton = ({ collectionName,
   ConfirmationComponent,
-  dispatch,
   entity,
   entityName,
   firstName,
@@ -24,7 +23,9 @@ const SubmitButton = ({ collectionName,
   history,
   isEdit,
   isNew,
-  requestTransactions
+  requestTransactions,
+  resetForm,
+  showModal
 }) => {
   const isEmptyForm = !form || getIsEmptyForm &&
     getIsEmptyForm(form, {
@@ -39,13 +40,13 @@ const SubmitButton = ({ collectionName,
     disabled={isEmptyForm}
     onClick={() => {
       if (isEdit || isNew) {
-        dispatch(resetForm())
-        formPutOptions && dispatch(requestTransactions('PUT', formPutOptions))
+        resetForm()
+        formPutOptions && requestTransactions('PUT', formPutOptions)
         history.push(`/home?isForcingLocationChange=true`)
       } else {
         history.push(`${window.location.pathname}?isEdit=true`)
       }
-      dispatch(showModal(<ConfirmationComponent />, { isCtaCloseButton: true }))
+      showModal(<ConfirmationComponent />, { isCtaCloseButton: true })
     }}
   >
     Submit
@@ -68,6 +69,6 @@ function mapStateToProps (state) {
     formPutOptions
   }
 }
-export default connect(mapStateToProps, dispatch => {
-  return { dispatch }
+export default connect(mapStateToProps, { resetForm,
+  showModal
 })(SubmitButton)

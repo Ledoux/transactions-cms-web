@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { requestTransactions } from 'transactions-redux-request'
 import { getTransactionsProps } from 'transactions-interface-state'
 import { Button } from 'transactions-interface-web'
 
@@ -18,8 +17,7 @@ class Explore extends Component {
     this.onExploreChange = this._onExploreChange.bind(this)
   }
   _handleRequestContent () {
-    const { dispatch,
-      label,
+    const { label,
       options,
       requestTransactions
     } = this.props
@@ -34,8 +32,8 @@ class Explore extends Component {
         }
       })
     if (requestOptions.length > 0) {
-      dispatch(requestTransactions('GET', requestOptions,
-        { tag: label ? `${label}-explore` : 'explore' }))
+      requestTransactions('GET', requestOptions,
+        { tag: label ? `${label}-explore` : 'explore' })
     }
   }
   _onExploreChange (state) {
@@ -54,7 +52,6 @@ class Explore extends Component {
   }
   render () {
     const { extra,
-      getFilteredElements,
       getRequestQuery,
       inputTemplate,
       interactions,
@@ -148,8 +145,7 @@ class Explore extends Component {
 }
 
 Explore.defaultProps = {
-  isSearch: true,
-  requestTransactions
+  isSearch: true
 }
 
-export default connect(null, dispatch => { return { dispatch } })(Explore)
+export default Explore

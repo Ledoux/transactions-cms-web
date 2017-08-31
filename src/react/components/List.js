@@ -3,6 +3,7 @@ import pluralize from 'pluralize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getNormalizerEntities } from 'transactions-redux-normalizer'
+import { assignReselectorFilter } from 'transactions-redux-reselector'
 import { getTransactionsProps } from 'transactions-interface-state'
 import { Warning } from 'transactions-interface-web'
 
@@ -14,12 +15,23 @@ class List extends Component {
     super()
     this.state = { entityName: null }
     this.handleSetEntityName = this._handleSetEntityName.bind(this)
+    this.handleFilterContent = this._handleFilterContent.bind(this)
   }
   _handleSetEntityName (props) {
     this.setState({ entityName: pluralize(props.collectionName, 1) })
   }
+  _handleFilterContent () {
+    const { assignReselectorFilter,
+      isSearch,
+      label,
+      query
+    } = this.props
+    !isSearch && query && assignReselectorFilter(
+      `WITH_${label.toUpperCase()}_AUTOMATIC_JOIN`, query)
+  }
   componentWillMount () {
     this.handleSetEntityName(this.props)
+    this.handleFilterContent()
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.collectionName !== this.props.collectionName) {
@@ -140,10 +152,13 @@ List.defaultProps = {
 
 // we get the entities from the pipelined entities
 // stored in the location reducer
-function mapStateToProps(state, { collectionName,
-  getFilteredElements,
-  label
-}) {
+function mapStateToProps(state, ownProps) {
+  const { collectionName,
+    getFilteredElements,
+    isSearch,
+    label,
+  } = ownProps
+  const listQuery = ownProps.query
   const { itemViewer,
     reselector: {
       WITH_SIGN_SEARCH: {
@@ -158,14 +173,20 @@ function mapStateToProps(state, { collectionName,
   }
   const ContentComponent = itemViewer[collectionName]
   // let s see if we need to restrict because of a search filter
-  const entities = getFilteredElements(state,
-    (query && sign === label)
-    ? 'WITH_SIGN_SEARCH'
-    : 'ALL',
+  let filterName = 'ALL'
+  if (isSearch) {
+    if (query && sign === label) {
+      filterName = 'WITH_SIGN_SEARCH'
+    }
+  }
+  else if (listQuery) {
+    filterName = `WITH_${label.toUpperCase()}_AUTOMATIC_JOIN`
+  }
+  const entities = getFilteredElements(state, filterName,
     collectionName, { isRecursive: true })
   // return
   return { ContentComponent,
     entities
   }
 }
-export default connect(mapStateToProps)(List)
+export default connect(mapStateToProps, { assignReselectorFilter })(List)

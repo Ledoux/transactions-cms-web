@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeModal,
   getAutomaticCollectionName,
-  showModal
+  getTransactionsProps,
+  showModal,
+  transact
 } from 'transactions-interface-state'
 import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
 
@@ -29,7 +31,6 @@ class ContentPage extends Component {
   _handleNavigation () {
     const { availableCollectionNames,
       availableSingularOrPluralNames,
-      dispatch,
       entityName,
       history,
       isModalActive,
@@ -38,7 +39,8 @@ class ContentPage extends Component {
       modeNamesBySingularOrPluralName,
       singularOrPluralName,
       showModalModesList,
-      taskName
+      taskName,
+      setAuthorizationSelectedMode
     } = this.props
     // first it is not necessary to contine if we don't have modes or if we are not
     // in a content page
@@ -49,10 +51,9 @@ class ContentPage extends Component {
     if (!singularOrPluralName) {
       if (!modeName) {
         if (modes && modes.length > 0) {
-          dispatch(showModalModesList
+          showModalModesList
             ? showModalModesList()
             : showModal('You need to choose a mode')
-          )
         } else {
           console.log('WE DON t have yet some modes')
           return
@@ -81,13 +82,14 @@ class ContentPage extends Component {
         // only set a new authorization if we have a good suggested mode
         // and that actually we are not already in that mode
         if (suggestedMode && modeName !== suggestedMode.name) {
-          dispatch(setAuthorizationSelectedMode(suggestedMode))
+          setAuthorizationSelectedMode(suggestedMode)
         }
       }
     }
   }
   render () {
-    const { getFilteredElements,
+    const { api,
+      getFilteredElements,
       history,
       isEdit,
       modeName,
@@ -117,19 +119,20 @@ class ContentPage extends Component {
       entityName,
       label
     }]
+    const transactionsProps = getTransactionsProps(this.props)
     return (<div className='page content-page'>
       <TaskComponent
+        api={api}
         collectionName={collectionName}
         entityName={entityName}
-        getFilteredElements={getFilteredElements}
         history={history}
-        label={label}
         isEdit={isEdit}
         isNew={isNew}
+        label={label}
         modeName={modeName}
-        requestTransactions={requestTransactions}
-        slug={slug}
         options={options}
+        slug={slug}
+        {...transactionsProps}
       />
     </div>)
   }
@@ -142,8 +145,7 @@ function mapStateToProps ({
   },
   modal: { isActive }
 }) {
-  return {
-    availableCollectionNames: mode && mode.availableCollectionNames,
+  return { availableCollectionNames: mode && mode.availableCollectionNames,
     availableSingularOrPluralNames: mode && mode.availableSingularOrPluralNames,
     isModalActive: isActive,
     modeName: mode && mode.name,
@@ -151,6 +153,6 @@ function mapStateToProps ({
     modes
   }
 }
-export default connect(mapStateToProps, dispatch => {
-  return { dispatch }
+export default connect(mapStateToProps, { setAuthorizationSelectedMode,
+  showModal
 })(ContentPage)

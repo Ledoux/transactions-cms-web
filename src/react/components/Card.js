@@ -6,7 +6,7 @@ import { getFormEntity,
   resetForm,
   setForm
 } from 'transactions-cms-state'
-import { getNotStoredOptions } from 'transactions-redux-normalizer'
+import { getNotStoredOptions } from 'transactions-redux-request'
 import shortid from 'shortid'
 
 import Control from './Control'
@@ -21,26 +21,32 @@ class Card extends Component {
   }
   _handleUpdateForm () {
     const { collectionName,
-      entity,
       entityName,
+      formEntity,
       getSlugByEntityName,
       isNew,
-      newForm,
-      notStoredOptions,
+      normalizer,
       requestTransactions,
-      setForm,
       search,
+      setForm,
       userId,
       userSlug
     } = this.props
     const { hasRequestedOnce } = this.state
+    // determine what to request
+    const newForm = getNewForm(search)
+    const notStoredOptions = newForm && getNotStoredOptions(normalizer,
+      newForm
+    )
+    // determine the total entity
+    const entity = Object.assign({}, this.props, formEntity)
     // check if we are not in the new situation in where
     // we don't have yet filled the form with an empty entity
     if (isNew && !entity.id) {
       // check first if we already downloaded the joined entities
       if (!hasRequestedOnce && notStoredOptions && notStoredOptions.length > 0) {
         this.setState({hasRequestedOnce: true})
-        requestTransactions('GET', notStoredOptions, 'form')
+        requestTransactions('GET', notStoredOptions, { tag: 'form' })
       }
       // look if there is not already some properties in the search
       const collectionKey = `${collectionName}ById`
@@ -58,9 +64,6 @@ class Card extends Component {
         console.warn(`In the Card Component,
           you need a form with a new entity`)
         return
-      }
-      if (newEntity.encodedUrl) {
-        newEntity.url = decodeURIComponent(newEntity.encodedUrl)
       }
       const newSlug = newEntity.slug
       if (!newSlug) {
@@ -90,20 +93,39 @@ class Card extends Component {
     this.props.resetForm()
   }
   render () {
-    const { entity,
+    const { api,
+      collectionName,
+      entityName,
+      entity,
       ChildComponent,
-      getIsEmptyForm
+      getIsEmptyForm,
+      isEdit,
+      isNew
     } = this.props
-    const { isControl } = (ChildComponent.WrappedComponent || ChildComponent).defaultProps
+    const WrappedComponent = ChildComponent.WrappedComponent || ChildComponent
+    if (!WrappedComponent) {
+      console.warn('Did not find WrappedComponent in Card')
+      return
+    }
+    const { isControl } = WrappedComponent.defaultProps || {}
     const transactionsProps = getTransactionsProps(this.props)
     return (<div className='card'>
       {
         isControl && <Control
+          collectionName={collectionName}
+          entityName={entityName}
           getIsEmptyForm={getIsEmptyForm}
+          isEdit={isEdit}
+          isNew={isNew}
           {...transactionsProps}
         />
       }
       <ChildComponent
+        api={api}
+        collectionName={collectionName}
+        entityName={entityName}
+        isEdit={isEdit}
+        isNew={isNew}
         {...entity}
         {...transactionsProps}
       />
@@ -113,27 +135,19 @@ class Card extends Component {
 
 function mapStateToProps (state, ownProps) {
   const { collectionName } = ownProps
-  const { scrap,
-    user: {
-      id,
+  const { normalizer,
+    router: { location: { search } },
+    user: { id,
       slug
     }
   } = state
   const formEntity = getFormEntity(state, collectionName, '_NEW_')
-  const newForm = getNewForm()
-  const notStoredOptions = newForm && getNotStoredOptions(state,
-    newForm,
-    { appSchema }
-  )
-  const entity = Object.assign({}, ownProps, scrap, formEntity)
-  return { entity,
-    newForm,
-    notStoredOptions,
+  return { normalizer,
+    search,
     userId: id,
     userSlug: slug
   }
 }
-export default connect(mapStateToProps, {
-  resetForm,
+export default connect(mapStateToProps, { resetForm,
   setForm
 })(Card)

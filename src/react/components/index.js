@@ -8,6 +8,7 @@ import Item from './Item'
 import List from './List'
 import Search from './Search'
 import SubmitButton from './SubmitButton'
+import UserHero from './UserHero'
 
 export { Card,
   Check,
@@ -18,5 +19,6 @@ export { Card,
   Item,
   List,
   Search,
-  SubmitButton
+  SubmitButton,
+  UserHero
 }

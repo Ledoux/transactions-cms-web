@@ -21,7 +21,7 @@ const Item = props => {
     text
   } = props
   const transactionsProps = getTransactionsProps(props)
-  return (<div className={classnames(className || 'item', {
+  return (<div className={classnames(className || `item item--${entityName}`, {
     'item--shrinked': isShrinked,
     'item--shrinked--last': isShrinked && isLast,
     'item--small': isSmall

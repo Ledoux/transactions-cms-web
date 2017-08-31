@@ -20,8 +20,9 @@ class InputForm extends Component {
     return !value || value !== nextState.value
   }
   componentDidUpdate () {
-    const { collectionName,
-      dispatch,
+    const { assignReselectorFilter,
+      collectionName,
+      deleteFormEntity,
       entity,
       entityId,
       entityName,
@@ -32,6 +33,8 @@ class InputForm extends Component {
       joinId,
       joinValue,
       label,
+      mergeForm,
+      mergeFormEntity,
       name,
       requestTransactions
     } = this.props
@@ -46,25 +49,25 @@ class InputForm extends Component {
     }
     // first check that we adapted the filter
     if (joinValue !== value) {
-      dispatch(assignReselectorFilter('WITH_SIGN_JOIN', {
+      assignReselectorFilter('WITH_SIGN_JOIN', {
         // do the sign given the label
         key: name,
         sign: label,
         value
-      }))
+      })
     }
     // check that it exists in the db if we could not find it before
     if (!entity) {
-      dispatch(requestTransactions('GET', [{
+      requestTransactions('GET', [{
         collectionName,
         query: {
           [name]: value
         }
-      }], collectionName))
+      }], { tag: collectionName })
     }
     // else we set the new form if we have new content
     if (entity && (isNew || joinId) && entityId !== entity.id) {
-      dispatch(mergeForm({
+      mergeForm({
         [`${joinCollectionName}ById`]: {
           [isNew ? '_NEW_' : joinId]: {
             [`${entityName}Id`]: entity.id
@@ -74,16 +77,16 @@ class InputForm extends Component {
         [`${collectionName}ById`]: {
           _NEW_: '_DELETE_'
         }
-      }))
+      })
     } else if (value === initialValue) {
       // either we refuind the odl initial value
       // so we cancel what we just did
-      dispatch(deleteFormEntity(collectionName, '_NEW_'))
+      deleteFormEntity(collectionName, '_NEW_')
     } else {
       // else we add in the new
-      dispatch(mergeFormEntity(collectionName, entityId || '_NEW_', {
+      mergeFormEntity(collectionName, entityId || '_NEW_', {
         [name]: value
-      }))
+      })
     }
   }
   _handleChangeValue (event) {
@@ -184,5 +187,8 @@ function mapStateToProps(state, { collectionName,
   }
   return {}
 }
-export default connect(mapStateToProps,
-  dispatch => { return { dispatch } })(InputForm)
+export default connect(mapStateToProps, { assignReselectorFilter,
+  deleteFormEntity,
+  mergeForm,
+  mergeFormEntity
+})(InputForm)
