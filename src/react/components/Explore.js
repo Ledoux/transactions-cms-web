@@ -129,6 +129,7 @@ class Explore extends Component {
               }
               <List
                 exploreState={this.state}
+                isSearch={isSearch}
                 isShrinked={isShrinked}
                 isSmall={isSmall}
                 label={label}

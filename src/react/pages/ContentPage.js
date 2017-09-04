@@ -120,21 +120,23 @@ class ContentPage extends Component {
       label
     }]
     const transactionsProps = getTransactionsProps(this.props)
-    return (<div className='page content-page'>
-      <TaskComponent
-        api={api}
-        collectionName={collectionName}
-        entityName={entityName}
-        history={history}
-        isEdit={isEdit}
-        isNew={isNew}
-        label={label}
-        modeName={modeName}
-        options={options}
-        slug={slug}
-        {...transactionsProps}
-      />
-    </div>)
+    return (
+      <main className='main page content-page'>
+        <TaskComponent
+          api={api}
+          collectionName={collectionName}
+          entityName={entityName}
+          history={history}
+          isEdit={isEdit}
+          isNew={isNew}
+          label={label}
+          modeName={modeName}
+          options={options}
+          slug={slug}
+          {...transactionsProps}
+        />
+      </main>
+    )
   }
 }
 

@@ -134,25 +134,27 @@ class Check extends Component {
       warningMessage = `Warning, we did not define yet a Card for the ${entityName} entity`
     }
     const transactionsProps = getTransactionsProps(this.props)
-    return (<main className='page check main'>
-      <div className='check__content'>
-        {
-          !warningMessage && ContentComponent && <Card
-            api={api}
-            ChildComponent={ContentComponent}
-            collectionName={collectionName}
-            entityName={entityName}
-            getIsEmptyForm={getIsEmptyForm}
-            isEdit={isEdit}
-            isNew={isNew}
-            isTitle
-            {...entity}
-            {...transactionsProps}
-          />
-        }
-        { warningMessage && <Warning text={warningMessage} /> }
+    return (
+      <div className='check'>
+        <div className='check__content'>
+          {
+            !warningMessage && ContentComponent && <Card
+              api={api}
+              ChildComponent={ContentComponent}
+              collectionName={collectionName}
+              entity={entity}
+              entityName={entityName}
+              getIsEmptyForm={getIsEmptyForm}
+              isEdit={isEdit}
+              isNew={isNew}
+              isTitle
+              {...transactionsProps}
+            />
+          }
+          { warningMessage && <Warning text={warningMessage} /> }
+        </div>
       </div>
-    </main>)
+    )
   }
 }
 

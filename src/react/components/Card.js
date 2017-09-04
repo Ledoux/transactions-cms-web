@@ -124,6 +124,7 @@ class Card extends Component {
         api={api}
         collectionName={collectionName}
         entityName={entityName}
+        getIsEmptyForm={getIsEmptyForm}
         isEdit={isEdit}
         isNew={isNew}
         {...entity}

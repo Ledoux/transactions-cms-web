@@ -1,5 +1,3 @@
-import '../src/styles/index.scss'
-
 export * from './react/cards'
 export * from './react/components'
 export * from './react/dashboards'
