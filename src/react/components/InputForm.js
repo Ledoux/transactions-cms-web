@@ -93,11 +93,13 @@ class InputForm extends Component {
     const { assignReselectorFilter,
       joinValue,
       label,
-      name
+      name,
+      onChangeValue
     } = this.props
     // adapt the value locally
     const value = event.target.value || ''
     this.setState({ value })
+    onChangeValue && onChangeValue(value)
   }
   render () {
     const { handleChangeValue } =  this

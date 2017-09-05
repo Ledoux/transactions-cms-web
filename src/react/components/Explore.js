@@ -88,6 +88,7 @@ class Explore extends Component {
               onExploreChange={this.onExploreChange}
               options={selectedOptions}
               placeholder={placeholder}
+              {...transactionsProps}
             />
           </div>
         )
