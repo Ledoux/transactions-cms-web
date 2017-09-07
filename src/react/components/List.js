@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getNormalizerEntities } from 'transactions-redux-normalizer'
 import { assignReselectorFilter } from 'transactions-redux-reselector'
-import { getTransactionsProps } from 'transactions-interface-state'
 import { Warning } from 'transactions-interface-web'
 
 import Item from './Item'
@@ -70,77 +69,74 @@ class List extends Component {
     const displayedLength = Math.min(maxDisplayCount, entitiesLength)
     const isNotTotal = maxDisplayCount && entitiesLength > maxDisplayCount
     const isMore = maxDisplayCount && isNotTotal
-    const transactionsProps = getTransactionsProps(this.props)
-    return (<div className={classnames('list', {
-      'list--shrinked': isShrinked
-    })}>
-      {
-        ContentComponent && entities && entities
-          .slice(0, displayedLength)
-          .map((entity, index) => (<div
+    return (
+      <div className={classnames('list', {
+        'list--shrinked': isShrinked
+      })}>
+        {
+          ContentComponent && entities && entities
+            .slice(0, displayedLength)
+            .map((entity, index) => (<div
+              className={classnames('list__child', {
+                'list__child--shrinked': isShrinked,
+                'list__child--small': isSmall
+              })}
+              key={index}>
+                <Item collectionName={collectionName}
+                  ContentComponent={ContentComponent}
+                  BottomInteractionComponent={BottomInteractionComponent}
+                  entity={entity}
+                  extraProps={extraProps}
+                  exploreState={exploreState}
+                  interactionExtraProps={interactionExtraProps}
+                  isLast={index === displayedLength - 1}
+                  isShrinked={isShrinked}
+                  isSmall={isSmall}
+                  LeftInteractionComponent={LeftInteractionComponent}
+                  onExploreChange={onExploreChange}
+                  RightInteractionComponent={RightInteractionComponent}
+                />
+            </div>)
+          )
+        }
+        {
+          warningMessage && (<div
             className={classnames('list__child', {
               'list__child--shrinked': isShrinked,
+              'list__child--shrinked--last': true,
               'list__child--small': isSmall
             })}
-            key={index}>
-              <Item
-                ContentComponent={ContentComponent}
-                BottomInteractionComponent={BottomInteractionComponent}
-                entity={entity}
-                entityName={entityName}
-                extraProps={extraProps}
+            key='more-item'>
+              <Item collectionName={collectionName}
                 exploreState={exploreState}
-                interactionExtraProps={interactionExtraProps}
-                isLast={index === displayedLength - 1}
+                isLast
                 isShrinked={isShrinked}
-                isSmall={isSmall}
-                LeftInteractionComponent={LeftInteractionComponent}
+                isSmall
                 onExploreChange={onExploreChange}
-                RightInteractionComponent={RightInteractionComponent}
-                {...transactionsProps}
+                text={warningMessage}
               />
           </div>)
-        )
-      }
-      {
-        warningMessage && (<div
-          className={classnames('list__child', {
-            'list__child--shrinked': isShrinked,
-            'list__child--shrinked--last': true,
-            'list__child--small': isSmall
-          })}
-          key='more-item'>
-            <Item
-              collectionName={collectionName}
-              exploreState={exploreState}
-              isLast
-              isShrinked={isShrinked}
-              isSmall
-              onExploreChange={onExploreChange}
-              text={warningMessage}
-            />
-        </div>)
-      }
-      {
-        ContentComponent && isMore && (<div
-          className={classnames('list__child', {
-            'list__child--shrinked': isShrinked,
-            'list__child--shrinked--last': true,
-            'list__child--small': isSmall
-          })}
-          key='more-item'>
-            <Item
-              collectionName={collectionName}
-              exploreState={exploreState}
-              isLast
-              isShrinked={isShrinked}
-              isSmall
-              onExploreChange={onExploreChange}
-              text={`Precise your search if you want to find other matching ${collectionName}`}
-            />
-        </div>)
-      }
-    </div>)
+        }
+        {
+          ContentComponent && isMore && (<div
+            className={classnames('list__child', {
+              'list__child--shrinked': isShrinked,
+              'list__child--shrinked--last': true,
+              'list__child--small': isSmall
+            })}
+            key='more-item'>
+              <Item collectionName={collectionName}
+                exploreState={exploreState}
+                isLast
+                isShrinked={isShrinked}
+                isSmall
+                onExploreChange={onExploreChange}
+                text={`Precise your search if you want to find other matching ${collectionName}`}
+              />
+          </div>)
+        }
+      </div>
+    )
   }
 }
 
@@ -154,13 +150,12 @@ List.defaultProps = {
 // stored in the location reducer
 function mapStateToProps(state, ownProps) {
   const { collectionName,
-    getFilteredElements,
     isSearch,
     label,
   } = ownProps
   const listQuery = ownProps.query
   const { itemViewer,
-    reselector: {
+    reselector: { getFilteredElements,
       WITH_SIGN_SEARCH: {
         query,
         sign

@@ -1,8 +1,10 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { assignReselectorFilter } from 'transactions-redux-reselector'
 import { IconButton } from 'transactions-interface-web'
+import { request } from 'transactions-redux-request'
 
 const AND_SEPARATOR = ' '
 const SEPARATOR = ':'
@@ -25,7 +27,7 @@ class Search extends Component {
     })
   }
   _handleAddContent () {
-    const { history,
+    const { push,
       options
     } = this.props
     const addOption = options && options[0]
@@ -40,7 +42,7 @@ class Search extends Component {
           }
         }
       }
-      history.push(`/content/check/${entityName}/new?form=${encodeURI(JSON.stringify(form))}`)
+      push(`/content/check/${entityName}/new?form=${encodeURI(JSON.stringify(form))}`)
     }
   }
   _handleRequestContent () {
@@ -48,10 +50,10 @@ class Search extends Component {
       observedCollectionName,
       options,
       query,
-      requestTransactions
+      request
     } = this.props
     const requestQuery = (getRequestQuery && getRequestQuery(query)) || query
-    requestTransactions('GET', options.map(({ collectionName }) => {
+    request('GET', options.map(({ collectionName }) => {
       return { collectionName,
         query: requestQuery
       }
@@ -162,9 +164,7 @@ Search.defaultProps = {
   placeholder: 'type here for searching what you want'
 }
 
-function mapStateToProps({
-  reselector: {
-    WITH_SIGN_SEARCH: {
+function mapStateToProps({ reselector: { WITH_SIGN_SEARCH: {
       query,
       sign
     }
@@ -174,5 +174,7 @@ function mapStateToProps({
   ? { query }
   : {}
 }
-export default connect(mapStateToProps,
-  { assignReselectorFilter })(Search)
+export default connect(mapStateToProps, { assignReselectorFilter,
+  push,
+  request
+})(Search)

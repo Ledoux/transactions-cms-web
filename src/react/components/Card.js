@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getTransactionsProps } from 'transactions-interface-state'
 import { getFormEntity,
   getNewForm,
   resetForm,
   setForm
 } from 'transactions-cms-state'
-import { getNotStoredOptions } from 'transactions-redux-request'
+import { getNotStoredOptions,
+  request
+} from 'transactions-redux-request'
 import shortid from 'shortid'
 
 import Control from './Control'
@@ -26,7 +27,7 @@ class Card extends Component {
       getSlugByEntityName,
       isNew,
       normalizer,
-      requestTransactions,
+      request,
       search,
       setForm,
       userId,
@@ -46,7 +47,7 @@ class Card extends Component {
       // check first if we already downloaded the joined entities
       if (!hasRequestedOnce && notStoredOptions && notStoredOptions.length > 0) {
         this.setState({hasRequestedOnce: true})
-        requestTransactions('GET', notStoredOptions, { tag: 'form' })
+        request('GET', notStoredOptions, { tag: 'form' })
       }
       // look if there is not already some properties in the search
       const collectionKey = `${collectionName}ById`
@@ -94,13 +95,8 @@ class Card extends Component {
   }
   render () {
     const { api,
-      collectionName,
-      entityName,
       entity,
-      ChildComponent,
-      getIsEmptyForm,
-      isEdit,
-      isNew
+      ChildComponent
     } = this.props
     const WrappedComponent = ChildComponent.WrappedComponent || ChildComponent
     if (!WrappedComponent) {
@@ -108,47 +104,34 @@ class Card extends Component {
       return
     }
     const { isControl } = WrappedComponent.defaultProps || {}
-    const transactionsProps = getTransactionsProps(this.props)
     return (<div className='card'>
-      {
-        isControl && <Control
-          collectionName={collectionName}
-          entityName={entityName}
-          getIsEmptyForm={getIsEmptyForm}
-          isEdit={isEdit}
-          isNew={isNew}
-          {...transactionsProps}
-        />
-      }
-      <ChildComponent
-        api={api}
-        collectionName={collectionName}
-        entityName={entityName}
-        getIsEmptyForm={getIsEmptyForm}
-        isEdit={isEdit}
-        isNew={isNew}
+      { isControl && <Control /> }
+      <ChildComponent api={api}
         {...entity}
-        {...transactionsProps}
       />
     </div>)
   }
 }
 
-function mapStateToProps (state, ownProps) {
-  const { collectionName } = ownProps
+const mapStateToProps = state => {
   const { normalizer,
     router: { location: { search } },
+    submit: { collectionName, entityName, isNew },
     user: { id,
       slug
     }
   } = state
   const formEntity = getFormEntity(state, collectionName, '_NEW_')
-  return { normalizer,
+  return { collectionName,
+    entityName,
+    isNew,
+    normalizer,
     search,
     userId: id,
     userSlug: slug
   }
 }
-export default connect(mapStateToProps, { resetForm,
+export default connect(mapStateToProps, { request,
+  resetForm,
   setForm
 })(Card)

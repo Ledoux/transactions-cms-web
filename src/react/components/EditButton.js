@@ -1,14 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { Button,
   Icon
 } from 'transactions-interface-web'
 
-const EditButton = ({ history }) => {
+const EditButton = ({ push }) => {
   return  (
     <Button
       className={`button button--alive edit-button`}
       onClick={() => {
-        history.push(`${window.location.pathname}?isEdit=true`)
+        push(`${window.location.pathname}?isEdit=true`)
       }}
     >
       <Icon className='icon edit-button__icon' icon='pen' />
@@ -16,4 +18,4 @@ const EditButton = ({ history }) => {
   )
 }
 
-export default EditButton
+export default connect(null, { push })(EditButton)

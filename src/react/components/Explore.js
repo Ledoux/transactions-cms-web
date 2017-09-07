@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getTransactionsProps } from 'transactions-interface-state'
+import { request } from 'transactions-redux-request'
 import { Button } from 'transactions-interface-web'
 
 import List from './List'
@@ -19,7 +19,7 @@ class Explore extends Component {
   _handleRequestContent () {
     const { label,
       options,
-      requestTransactions
+      request
     } = this.props
     // given the frontend options
     // we here adapt the options necessary for
@@ -32,7 +32,7 @@ class Explore extends Component {
         }
       })
     if (requestOptions.length > 0) {
-      requestTransactions('GET', requestOptions,
+      request('GET', requestOptions,
         { tag: label ? `${label}-explore` : 'explore' })
     }
   }
@@ -71,7 +71,6 @@ class Explore extends Component {
     selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
     const isSelection = options && options.length > 1
     const isLists = selectedOptions.length > 0
-    const transactionsProps = getTransactionsProps(this.props)
     return (<div className='explore'>
       {
         isSearch && (
@@ -88,14 +87,13 @@ class Explore extends Component {
               onExploreChange={this.onExploreChange}
               options={selectedOptions}
               placeholder={placeholder}
-              {...transactionsProps}
             />
           </div>
         )
       }
       <div className='explore__collections flex flex-wrap'>
         {
-          isSelection && options.map(({collectionName}, index) => {
+          isSelection && options.map(({ collectionName }, index) => {
             const isSelected = selectedIndexes.includes(index)
             return (<Button
               className={classnames('button button--alive explore__collections__child', {
@@ -109,7 +107,7 @@ class Explore extends Component {
                 this.setState({ selectedIndexes: newSelectedIndexes })
               }}
             >
-              {collectionName}
+              { collectionName }
             </Button>)
           })
         }
@@ -128,7 +126,7 @@ class Explore extends Component {
                   {selectedOption.collectionName}
                 </p>
               }
-              <List
+              <List collectionName={selectedOption.collectionName}
                 exploreState={this.state}
                 isSearch={isSearch}
                 isShrinked={isShrinked}
@@ -136,7 +134,6 @@ class Explore extends Component {
                 label={label}
                 onExploreChange={this.onExploreChange}
                 {...selectedOption}
-                {...transactionsProps}
               />
             </div>)
           })
@@ -150,4 +147,4 @@ Explore.defaultProps = {
   isSearch: true
 }
 
-export default Explore
+export default connect(null, { request })(Explore)

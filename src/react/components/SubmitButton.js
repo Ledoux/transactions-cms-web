@@ -1,56 +1,51 @@
 import classnames from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { resetForm } from 'transactions-cms-state'
 import { getFormPutOptions,
-  resetForm
-} from 'transactions-cms-state'
-import { getUpdatedSearchString,
+  getUpdatedSearchString,
   showModal
 } from 'transactions-interface-state'
 import { Button,
   Confirmation,
   Icon
 } from 'transactions-interface-web'
+import { request } from 'transactions-redux-request'
 
-const SubmitButton = ({ collectionName,
+const SubmitButton = ({ className,
   ConfirmationComponent,
-  entity,
-  entityName,
-  firstName,
   form,
-  formPutOptions,
-  getIsEmptyForm,
-  history,
+  isSubmitAllowed,
   isEdit,
   isNew,
-  requestTransactions,
+  push,
+  request,
   resetForm,
   showModal
 }) => {
-  const isEmptyForm = !form || getIsEmptyForm &&
-    getIsEmptyForm(form, {
-      entity,
-      isNew,
-      isEdit
-    }) || false
-  return (<Button
-    className={classnames(`button button--alive check-submit-button`, {
-      'button--disabled': isEmptyForm
-    })}
-    disabled={isEmptyForm}
-    onClick={() => {
-      if (isEdit || isNew) {
-        resetForm()
-        formPutOptions && requestTransactions('PUT', formPutOptions)
-        history.push(`/home?isForcingLocationChange=true`)
-      } else {
-        history.push(`${window.location.pathname}?isEdit=true`)
-      }
-      showModal(<ConfirmationComponent />, { isCtaCloseButton: true })
-    }}
-  >
-    Submit
-  </Button>)
+  return (
+    <Button
+      className={classnames(className ||
+        'button button--alive submit-button', {
+        'button--disabled': !isSubmitAllowed
+      })}
+      disabled={!isSubmitAllowed}
+      onClick={() => {
+        if (isEdit || isNew) {
+          resetForm()
+          const formPutOptions = getFormPutOptions(form)
+          formPutOptions && request('PUT', formPutOptions)
+          push(`/home?isForcingLocationChange=true`)
+        } else {
+          push(`${window.location.pathname}?isEdit=true`)
+        }
+        showModal(<ConfirmationComponent />, { isCtaCloseButton: true })
+      }}
+    >
+      Submit
+    </Button>
+  )
 }
 
 SubmitButton.defaultProps = {
@@ -59,16 +54,14 @@ SubmitButton.defaultProps = {
 
 function mapStateToProps (state) {
   const { form,
-    user: {
-      firstName
-    }
+    submit: { isAllowed }
   } = state
-  const formPutOptions = getFormPutOptions(state)
-  return { firstName,
-    form,
-    formPutOptions
+  return { form,
+    isSubmitAllowed: isAllowed
   }
 }
-export default connect(mapStateToProps, { resetForm,
+export default connect(mapStateToProps, { push,
+  resetForm,
+  request,
   showModal
 })(SubmitButton)

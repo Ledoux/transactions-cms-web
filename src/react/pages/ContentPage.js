@@ -1,13 +1,14 @@
 import pluralize from 'pluralize'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
+import { setSubmitName } from 'transactions-cms-state'
 import { closeModal,
   getAutomaticCollectionName,
-  getTransactionsProps,
   showModal,
   transact
 } from 'transactions-interface-state'
-import { setAuthorizationSelectedMode } from 'transactions-authorization-state'
 
 import Check from '../components/Check'
 import Explore from '../components/Explore'
@@ -20,10 +21,19 @@ const TaskComponentsByName = {
 class ContentPage extends Component {
   constructor () {
     super()
+    this.state = { collectionName: null,
+      entityName: null
+    }
     this.handleNavigation = this._handleNavigation.bind(this)
   }
   componentDidMount () {
     this.handleNavigation()
+  }
+  componentWillMount () {
+    const { setSubmitName,
+      singularOrPluralName
+    } = this.props
+    setSubmitName(singularOrPluralName)
   }
   componentDidUpdate () {
     this.handleNavigation()
@@ -32,11 +42,11 @@ class ContentPage extends Component {
     const { availableCollectionNames,
       availableSingularOrPluralNames,
       entityName,
-      history,
       isModalActive,
       modes,
       modeName,
       modeNamesBySingularOrPluralName,
+      push,
       singularOrPluralName,
       showModalModesList,
       taskName,
@@ -65,14 +75,14 @@ class ContentPage extends Component {
           const singularOrPluralName = taskName === 'check'
           ? pluralize(automaticCollectionName, 1)
           : automaticCollectionName
-          history.push(`/content/${taskName}/${singularOrPluralName}`)
+          push(`/content/${taskName}/${singularOrPluralName}`)
         }
       }
     } else {
       // check that maybe we changed the mode so the singularOrPluralName is deprecated
       if (availableSingularOrPluralNames &&
         !availableSingularOrPluralNames.includes(singularOrPluralName)) {
-        history.push(`/content/${taskName}`)
+        push(`/content/${taskName}`)
         return
       }
       // and let's find automatically what it is
@@ -89,59 +99,39 @@ class ContentPage extends Component {
   }
   render () {
     const { api,
-      getFilteredElements,
-      history,
       isEdit,
       modeName,
-      requestTransactions,
       singularOrPluralName,
       slug,
       taskName
     } = this.props
+    const { collectionName,
+      entityName
+    } = this.state
     const componentName = (taskName &&
       `${taskName[0].toUpperCase()}${taskName.slice(1)}`) || 'Explore'
     const TaskComponent = TaskComponentsByName[componentName]
-    let collectionName
-    let entityName
-    if (singularOrPluralName) {
-      if (taskName === 'check') {
-        collectionName = pluralize(singularOrPluralName, 2)
-        entityName = singularOrPluralName
-      } else {
-        collectionName = singularOrPluralName
-        entityName = pluralize(singularOrPluralName, 1)
-      }
-    }
-    const isNew = slug === 'new'
     const label = `content-${collectionName}`
-    const options = [{
-      collectionName,
+    const options = [{ collectionName,
       entityName,
       label
     }]
-    const transactionsProps = getTransactionsProps(this.props)
     return (
       <main className='main page content-page'>
         <TaskComponent
           api={api}
-          collectionName={collectionName}
-          entityName={entityName}
-          history={history}
           isEdit={isEdit}
-          isNew={isNew}
           label={label}
           modeName={modeName}
           options={options}
           slug={slug}
-          {...transactionsProps}
         />
       </main>
     )
   }
 }
 
-function mapStateToProps ({
-  authorization: { mode,
+function mapStateToProps ({ authorization: { mode,
     modeNamesBySingularOrPluralName,
     modes
   },
@@ -155,6 +145,8 @@ function mapStateToProps ({
     modes
   }
 }
-export default connect(mapStateToProps, { setAuthorizationSelectedMode,
+export default connect(mapStateToProps, { push,
+  setAuthorizationSelectedMode,
+  setSubmitName,
   showModal
 })(ContentPage)

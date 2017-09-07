@@ -1,19 +1,26 @@
+import pluralize from 'pluralize'
 import React, { Component } from 'react'
-import DebounceInput from 'react-debounce-input';
+import DebounceInput from 'react-debounce-input'
 import { connect } from 'react-redux'
 import { deleteFormEntity,
   mergeForm,
   mergeFormEntity
 } from 'transactions-cms-state'
+import { request } from 'transactions-redux-request'
 import { assignReselectorFilter } from 'transactions-redux-reselector'
 
 class InputForm extends Component {
   constructor () {
     super()
-    this.state = {
+    this.state = { entityName: null,
       value: null
     }
     this.handleChangeValue = this._handleChangeValue.bind(this)
+  }
+  componentWillMount () {
+    this.setState ({
+      entityName: pluralize(this.props.collectionName, 1)
+    })
   }
   shouldComponentUpdate (nextProps, nextState) {
     const { value } = this.state
@@ -25,7 +32,6 @@ class InputForm extends Component {
       deleteFormEntity,
       entity,
       entityId,
-      entityName,
       initialValue,
       isNew,
       joinCollectionName,
@@ -36,9 +42,10 @@ class InputForm extends Component {
       mergeForm,
       mergeFormEntity,
       name,
-      requestTransactions
+      request
     } = this.props
-    const { hasRequestedOnce,
+    const { entityName,
+      hasRequestedOnce,
       value
     } = this.state
     // all here is just necessary when we type
@@ -58,7 +65,7 @@ class InputForm extends Component {
     }
     // check that it exists in the db if we could not find it before
     if (!entity) {
-      requestTransactions('GET', [{
+      request('GET', [{
         collectionName,
         query: {
           [name]: value
@@ -125,72 +132,79 @@ class InputForm extends Component {
     const info = value === initialValue
     ? '(FOUND)'
     : (entity ? '(NEW FOUND)' : '(NEW)')
-    return (<div
-      className={ className || 'input-form' }
-      itemProp={itemProp}
-      itemScope={itemScope}
-      itemType={itemType}
-    >
-      {
-        !isText && (<div className='input-form__title'>
-           <label className='input-form__title__label'>
-            {label} {info}
-          </label>
-        </div>)
-      }
-      <div className='input-form__content'>
-      {
-        isText
-        ? (
-          isHTML
-          ? <div dangerouslySetInnerHTML={{ __html: value }} />
-          : (<p
-            className='input-form__content__text'
-            itemProp={valueItemProp}
-          >
-            {value}
-          </p>)
-        )
-        : <DebounceInput
-            className='input-form__content__input'
-            debounceTimeout={500}
-            name={name}
-            type='text'
-            onChange={event => handleChangeValue(event)}
-            required
-            value={value}
-          />
-      }
+    return (
+      <div
+        className={ className || 'input-form' }
+        itemProp={itemProp}
+        itemScope={itemScope}
+        itemType={itemType}
+      >
+        {
+          !isText && (<div className='input-form__title'>
+             <label className='input-form__title__label'>
+              {label} {info}
+            </label>
+          </div>)
+        }
+        <div className='input-form__content'>
+        {
+          isText
+          ? (
+            isHTML
+            ? <div dangerouslySetInnerHTML={{ __html: value }} />
+            : (<p
+              className='input-form__content__text'
+              itemProp={valueItemProp}
+            >
+              {value}
+            </p>)
+          )
+          : <DebounceInput
+              className='input-form__content__input'
+              debounceTimeout={500}
+              name={name}
+              type='text'
+              onChange={event => handleChangeValue(event)}
+              required
+              value={value}
+            />
+        }
+      </div>
     </div>
-  </div>)
+    )
   }
 }
 
 function mapStateToProps(state, { collectionName,
-  getFilteredElements,
   label
 }) {
-  const {
-    reselector: {
+  const { reselector: { getFilteredElements,
       WITH_SIGN_JOIN: {
         key,
         sign,
         value
       }
+    },
+    submit: { isEdit,
+      isNew
     }
   } = state
+  const newState = { isEdit,
+    isNew
+  }
   if (label === sign) {
     const entities = getFilteredElements(state, 'WITH_SIGN_JOIN', collectionName)
     const entity = entities.length === 1 && entities[0]
-    return { entity,
+    Object.assign(newState, { entity,
       joinKey: key,
       joinValue: value
-    }
+    })
   }
-  return {}
+  return newState
 }
 export default connect(mapStateToProps, { assignReselectorFilter,
   deleteFormEntity,
   mergeForm,
-  mergeFormEntity
+  mergeFormEntity,
+  request
 })(InputForm)

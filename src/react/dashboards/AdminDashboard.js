@@ -1,5 +1,4 @@
 import React from 'react'
-import { getTransactionsProps } from 'transactions-interface-state'
 import { Title } from 'transactions-interface-web'
 
 import Explore from '../components/Explore'
@@ -10,15 +9,13 @@ const usersExploreOptions = [{ collectionName: 'users',
 }]
 
 const AdminDashboard = props => {
-  const transactionsProps = getTransactionsProps(props)
   return (<div className='admin-dashboard'>
     <p className='admin-dashboard__title'>
       This is the admin dashboard!
     </p>
     <div className='admin-dashboard__users'>
       <Title icon='experts' text='USERS' />
-      <Explore
-        getRequestQuery={query => {
+      <Explore getRequestQuery={query => {
           // attributes in the user objects
           // are contained into the nested local object
           const requestQuery = {}
@@ -36,7 +33,6 @@ const AdminDashboard = props => {
         label='admin-users'
         options={usersExploreOptions}
         placeholder='search for users'
-        {...transactionsProps}
       />
     </div>
   </div>)

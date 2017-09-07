@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import React from 'react'
-import { getTransactionsProps } from 'transactions-interface-state'
 
 const Item = props => {
   const { BottomInteractionComponent,
@@ -20,7 +19,6 @@ const Item = props => {
     RightInteractionComponent,
     text
   } = props
-  const transactionsProps = getTransactionsProps(props)
   return (<div className={classnames(className || `item item--${entityName}`, {
     'item--shrinked': isShrinked,
     'item--shrinked--last': isShrinked && isLast,
@@ -32,12 +30,10 @@ const Item = props => {
           'item__left-interaction--shrinked': isShrinked
         })}>
         <LeftInteractionComponent
-          entityName={entityName}
           exploreState={exploreState}
           onExploreChange={onExploreChange}
           {...entity}
           {...interactionExtraProps}
-          {...transactionsProps}
         />
       </div>)
     }
@@ -47,45 +43,43 @@ const Item = props => {
     }>
       {
         ContentComponent && <ContentComponent
-          collectionName={collectionName}
           {...entity}
           {...extraProps}
-          {...transactionsProps}
         />
       }
       {
-        text && (<p className='item__content__text'>
-          {text}
-        </p>)
+        text && (
+          <p className='item__content__text'>
+            {text}
+          </p>
+        )
       }
     </div>
     {
-      RightInteractionComponent && (<div
-        className={classnames('item__right-interaction ', {
-          'item__right-interaction--shrinked': isShrinked
-        })}>
-        <RightInteractionComponent
-          entityName={entityName}
-          exploreState={exploreState}
-          onExploreChange={onExploreChange}
-          {...entity}
-          {...interactionExtraProps}
-          {...transactionsProps}
-        />
-      </div>)
+      RightInteractionComponent && (
+        <div className={classnames('item__right-interaction ', {
+            'item__right-interaction--shrinked': isShrinked
+          })}>
+          <RightInteractionComponent
+            exploreState={exploreState}
+            onExploreChange={onExploreChange}
+            {...entity}
+            {...interactionExtraProps}
+          />
+        </div>
+      )
     }
     {
-      BottomInteractionComponent && (<div
-        className='item__bottom-interaction'>
-        <BottomInteractionComponent
-          entityName={entityName}
-          exploreState={exploreState}
-          onExploreChange={onExploreChange}
-          {...entity}
-          {...interactionExtraProps}
-          {...transactionsProps}
-        />
-      </div>)
+      BottomInteractionComponent && (
+        <div className='item__bottom-interaction'>
+          <BottomInteractionComponent
+            exploreState={exploreState}
+            onExploreChange={onExploreChange}
+            {...entity}
+            {...interactionExtraProps}
+          />
+        </div>
+      )
     }
   </div>)
 }
