@@ -1,7 +1,8 @@
 import React from 'react'
-
 import { getIsEditOrNewNotBlock } from 'transactions-cms-state'
+import { getLocationSearchString } from 'transactions-interface-state'
 
+// function should return true if you want to continue next
 export const handleBeforeNavigation = ({ availableModes,
   BlockComponent,
   nextSearch,
@@ -20,8 +21,7 @@ export const handleBeforeNavigation = ({ availableModes,
       icon='warning'
       subtext='You are still editing some content'
       text='Are you sure you want to leave this page ?'
-      nextLocation={{
-        pathname: location.pathname,
+      nextLocation={{ pathname: location.pathname,
         search: getLocationSearchString(nextSearch),
         state: location.state
       }}
@@ -32,4 +32,5 @@ export const handleBeforeNavigation = ({ availableModes,
     })
     return isNotBlock
   }
+  return true
 }

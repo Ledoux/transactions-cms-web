@@ -178,7 +178,7 @@ class InputForm extends Component {
 function mapStateToProps(state, { collectionName,
   label
 }) {
-  const { reselector: { getFilteredElements,
+  const { reselector: { reselect,
       WITH_SIGN_JOIN: {
         key,
         sign,
@@ -193,7 +193,7 @@ function mapStateToProps(state, { collectionName,
     isNew
   }
   if (label === sign) {
-    const entities = getFilteredElements(state, 'WITH_SIGN_JOIN', collectionName)
+    const entities = reselect(state, 'WITH_SIGN_JOIN', collectionName)
     const entity = entities.length === 1 && entities[0]
     Object.assign(newState, { entity,
       joinKey: key,

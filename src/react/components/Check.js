@@ -158,7 +158,7 @@ class Check extends Component {
 const mapStateToProps = state => {
   const { cardViewer,
     modal: { isActive },
-    reselector: { getFilteredElements,
+    reselector: { reselect,
       WITH_SLUG
     },
     submit: { collectionName,
@@ -167,7 +167,7 @@ const mapStateToProps = state => {
     }
   } = state
   const ContentComponent = entityName && cardViewer[entityName]
-  const slugEntities = collectionName && getFilteredElements(state,
+  const slugEntities = collectionName && reselect(state,
     'WITH_SLUG', collectionName)
   const entity = collectionName && slugEntities && slugEntities.length === 1 && slugEntities[0]
   const pipelineEntity = entity && getPipelineEntity(state,

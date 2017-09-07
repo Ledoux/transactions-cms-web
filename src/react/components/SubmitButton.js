@@ -33,9 +33,9 @@ const SubmitButton = ({ className,
       disabled={!isSubmitAllowed}
       onClick={() => {
         if (isEdit || isNew) {
-          resetForm()
           const formPutOptions = getFormPutOptions(form)
-          formPutOptions && request('PUT', formPutOptions)
+          resetForm()
+          formPutOptions && request('PUT', formPutOptions, { tag: 'submit' })
           push(`/home?isForcingLocationChange=true`)
         } else {
           push(`${window.location.pathname}?isEdit=true`)

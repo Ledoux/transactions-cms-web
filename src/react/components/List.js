@@ -155,7 +155,7 @@ function mapStateToProps(state, ownProps) {
   } = ownProps
   const listQuery = ownProps.query
   const { itemViewer,
-    reselector: { getFilteredElements,
+    reselector: { reselect,
       WITH_SIGN_SEARCH: {
         query,
         sign
@@ -177,7 +177,7 @@ function mapStateToProps(state, ownProps) {
   else if (listQuery) {
     filterName = `WITH_${label.toUpperCase()}_AUTOMATIC_JOIN`
   }
-  const entities = getFilteredElements(state, filterName,
+  const entities = reselect(state, filterName,
     collectionName, { isRecursive: true })
   // return
   return { ContentComponent,
