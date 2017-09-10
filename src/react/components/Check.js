@@ -8,7 +8,7 @@ import { assignPipeline,
   getFormEntity,
   getPipelineEntities,
   getPipelineEntity,
-  setSubmitConfig
+  setSubmitId
 } from 'transactions-cms-state'
 import { Warning } from 'transactions-interface-web'
 import { request } from 'transactions-redux-request'
@@ -31,13 +31,10 @@ class Check extends Component {
     this.handleNavigation()
   }
   componentWillMount () {
-    const { isEdit,
-      setSubmitConfig,
-      slug
+    const { id,
+      setSubmitId,
     } = this.props
-    setSubmitConfig({ isEdit,
-      isNew: slug === 'new'
-    })
+    setSubmitId(id)
   }
   componentWillUnmount () {
     this.props.mergeReselector({
@@ -122,6 +119,7 @@ class Check extends Component {
   }
   render () {
     const { api,
+      collectionName,
       ContentComponent,
       entity,
       entityName,
@@ -143,8 +141,11 @@ class Check extends Component {
           {
             !warningMessage && ContentComponent && <Card
               api={api}
-              ChildComponent={ContentComponent}
+              collectionName={collectionName}
               entity={entity}
+              entityName={entityName}
+              ChildComponent={ContentComponent}
+              isNew={isNew}
               isTitle
             />
           }
@@ -155,16 +156,15 @@ class Check extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, { collectionName,
+  entityName
+}) => {
   const { cardViewer,
     modal: { isActive },
     reselector: { reselect,
       WITH_SLUG
     },
-    submit: { collectionName,
-      entityName,
-      isNew
-    }
+    submit: { isNew }
   } = state
   const ContentComponent = entityName && cardViewer[entityName]
   const slugEntities = collectionName && reselect(state,
@@ -191,5 +191,5 @@ export default connect(mapStateToProps, { assignPipeline,
   mergeReselector,
   push,
   request,
-  setSubmitConfig
+  setSubmitId
 })(Check)

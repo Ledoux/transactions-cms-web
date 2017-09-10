@@ -1,90 +1,49 @@
 import classnames from 'classnames'
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { request } from 'transactions-redux-request'
+import React from 'react'
+import { Explore as withState } from 'transactions-cms-state'
 import { Button } from 'transactions-interface-web'
 
 import List from './List'
 import Search from './Search'
 
-class Explore extends Component {
-  constructor (props) {
-    super ()
-    this.state = {
-      selectedIndexes: props.options && [0]
-    }
-    this.handleRequestContent = this._handleRequestContent.bind(this)
-    this.onExploreChange = this._onExploreChange.bind(this)
-  }
-  _handleRequestContent () {
-    const { label,
-      options,
-      request
-    } = this.props
-    // given the frontend options
-    // we here adapt the options necessary for
-    // the backend request
-    const requestOptions = options
-      //.filter(option => option.query)
-      .map(({collectionName, query}) => {
-        return { collectionName,
-          query
-        }
-      })
-    if (requestOptions.length > 0) {
-      request('GET', requestOptions,
-        { tag: label ? `${label}-explore` : 'explore' })
-    }
-  }
-  _onExploreChange (state) {
-    this.setState(state)
-  }
-  componentDidMount () {
-    this.handleRequestContent()
-  }
-  componentDidUpdate (prevProps) {
-    const { options } = this.props
-    // look for a state with one single collection
-    if ((!prevProps.options || prevProps.options.length !== 1)
-      && options && options.length === 1) {
-      this.setState({selectedIndexes: [0]})
-    }
-  }
-  render () {
-    const { extra,
-      getRequestQuery,
-      inputTemplate,
-      interactions,
-      isAdd,
-      isSearch,
-      isShrinked,
-      isSmall,
-      label,
-      options,
-      placeholder
-    } = this.props
-    const { explore,
-      selectedIndexes
-    } = this.state
-    const selectedOptions = selectedIndexes.map(selectedIndex =>
-      options[selectedIndex])
-    selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
-    const isSelection = options && options.length > 1
-    const isLists = selectedOptions.length > 0
-    return (<div className='explore'>
+const Explore = ({ extra,
+  getRequestQuery,
+  inputTemplate,
+  interactions,
+  isAdd,
+  isSearch,
+  isShrinked,
+  isSmall,
+  label,
+  onExploreChange,
+  onSelectionClick,
+  options,
+  placeholder,
+  state
+}) => {
+  const { explore,
+    selectedIndexes
+  } = state
+  const selectedOptions = selectedIndexes.map(selectedIndex =>
+    options[selectedIndex])
+  selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
+  const isSelection = options && options.length > 1
+  const isLists = selectedOptions.length > 0
+  return (
+    <div className='explore'>
       {
         isSearch && (
           <div className={classnames('explore__search', {
               'explore__search--shrinked': isShrinked
           })}>
             <Search
-              exploreState={this.state}
+              exploreState={state}
               getRequestQuery={getRequestQuery}
               interactions={interactions}
               inputTemplate={inputTemplate}
               isAdd
               label={label}
-              onExploreChange={this.onExploreChange}
+              onExploreChange={onExploreChange}
               options={selectedOptions}
               placeholder={placeholder}
             />
@@ -95,20 +54,17 @@ class Explore extends Component {
         {
           isSelection && options.map(({ collectionName }, index) => {
             const isSelected = selectedIndexes.includes(index)
-            return (<Button
-              className={classnames('button button--alive explore__collections__child', {
-                'explore__collections__child--selected': isSelected
-              })}
-              key={index}
-              onClick={() => {
-                const newSelectedIndexes = isSelected
-                ? selectedIndexes.filter(selectedIndex => selectedIndex !== index)
-                : selectedIndexes.concat([index])
-                this.setState({ selectedIndexes: newSelectedIndexes })
-              }}
-            >
-              { collectionName }
-            </Button>)
+            return (
+              <Button
+                className={classnames('button button--alive explore__collections__child', {
+                  'explore__collections__child--selected': isSelected
+                })}
+                key={index}
+                onClick={onSelectionClick}
+              >
+                { collectionName }
+              </Button>
+            )
           })
         }
       </div>
@@ -117,34 +73,32 @@ class Explore extends Component {
       })}>
         {
           isLists && selectedOptions.map((selectedOption, index) => {
-            return (<div
-              className='explore__lists__child'
-              key={index}
-            >
-              {
-                isSelection && <p className='explore__lists__child__title'>
-                  {selectedOption.collectionName}
-                </p>
-              }
-              <List collectionName={selectedOption.collectionName}
-                exploreState={this.state}
-                isSearch={isSearch}
-                isShrinked={isShrinked}
-                isSmall={isSmall}
-                label={label}
-                onExploreChange={this.onExploreChange}
-                {...selectedOption}
-              />
-            </div>)
+            return (
+              <div
+                className='explore__lists__child'
+                key={index}
+              >
+                {
+                  isSelection && <p className='explore__lists__child__title'>
+                    {selectedOption.collectionName}
+                  </p>
+                }
+                <List collectionName={selectedOption.collectionName}
+                  exploreState={state}
+                  isSearch={isSearch}
+                  isShrinked={isShrinked}
+                  isSmall={isSmall}
+                  label={label}
+                  onExploreChange={onExploreChange}
+                  {...selectedOption}
+                />
+              </div>
+            )
           })
         }
       </div>
-    </div>)
-  }
+    </div>
+  )
 }
 
-Explore.defaultProps = {
-  isSearch: true
-}
-
-export default connect(null, { request })(Explore)
+export default withState(Explore)

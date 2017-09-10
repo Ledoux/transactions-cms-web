@@ -113,19 +113,15 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, { collectionName })=> {
   const { normalizer,
     router: { location: { search } },
-    submit: { collectionName, entityName, isNew },
     user: { id,
       slug
     }
   } = state
   const formEntity = getFormEntity(state, collectionName, '_NEW_')
-  return { collectionName,
-    entityName,
-    isNew,
-    normalizer,
+  return { normalizer,
     search,
     userId: id,
     userSlug: slug

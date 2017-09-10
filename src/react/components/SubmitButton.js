@@ -2,9 +2,10 @@ import classnames from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { resetForm } from 'transactions-cms-state'
 import { getFormPutOptions,
-  getUpdatedSearchString,
+  resetForm
+} from 'transactions-cms-state'
+import { getUpdatedSearchString,
   showModal
 } from 'transactions-interface-state'
 import { Button,
@@ -16,10 +17,12 @@ import { request } from 'transactions-redux-request'
 const SubmitButton = ({ className,
   ConfirmationComponent,
   form,
-  isSubmitAllowed,
+  isAllowed,
   isEdit,
   isNew,
+  pathname,
   push,
+  redirectPathname,
   request,
   resetForm,
   showModal
@@ -28,17 +31,18 @@ const SubmitButton = ({ className,
     <Button
       className={classnames(className ||
         'button button--alive submit-button', {
-        'button--disabled': !isSubmitAllowed
+        'button--disabled': !isAllowed
       })}
-      disabled={!isSubmitAllowed}
+      disabled={!isAllowed}
       onClick={() => {
         if (isEdit || isNew) {
           const formPutOptions = getFormPutOptions(form)
+          console.log('formPutOptions', formPutOptions)
           resetForm()
           formPutOptions && request('PUT', formPutOptions, { tag: 'submit' })
-          push(`/home?isForcingLocationChange=true`)
+          redirectPathname && push(`/${redirectPathname}?isForcingLocationChange=true`)
         } else {
-          push(`${window.location.pathname}?isEdit=true`)
+          push(`${pathname}?isEdit=true`)
         }
         showModal(<ConfirmationComponent />, { isCtaCloseButton: true })
       }}
@@ -54,10 +58,17 @@ SubmitButton.defaultProps = {
 
 function mapStateToProps (state) {
   const { form,
-    submit: { isAllowed }
+    router: { location: { pathname } },
+    submit: { isAllowed,
+      isEdit,
+      isNew
+    }
   } = state
   return { form,
-    isSubmitAllowed: isAllowed
+    isAllowed,
+    isEdit,
+    isNew,
+    pathname
   }
 }
 export default connect(mapStateToProps, { push,
