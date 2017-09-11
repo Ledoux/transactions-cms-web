@@ -4,10 +4,9 @@ import { connect } from 'react-redux'
 import EditButton from './EditButton'
 import SubmitButton from './SubmitButton'
 
-const Control = props => {
-  const { isEdit,
-    isNew
-  } = props
+const Control = ({ isEdit,
+  isNew
+}) => {
   return (
     <div className='control flex flex-auto'>
       {
