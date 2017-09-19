@@ -1,7 +1,8 @@
 import React from 'react'
+import { UserHero as withState } from 'transactions-cms-state'
 import { Avatar } from 'transactions-interface-web'
 
-import InputForm from './InputForm'
+import InputForm from '../forms/InputForm'
 
 const UserHero = props => {
   const { children,
@@ -9,7 +10,8 @@ const UserHero = props => {
     email,
     firstName,
     lastName,
-    imageUrl
+    imageUrl,
+    isFrozen
   } = props
   return (
     <div className='user-hero'>
@@ -27,6 +29,7 @@ const UserHero = props => {
             className='input-form user-hero__content__name__first md-col'
             collectionName='users'
             entityId={id}
+            isFrozen={isFrozen}
             label='First Name'
             name='local.firstName'
             initialValue={firstName || ''}
@@ -36,6 +39,7 @@ const UserHero = props => {
             className='input-form user-hero__content__name__last md-col'
             collectionName='users'
             entityId={id}
+            isFrozen={isFrozen}
             label='Last Name'
             name='local.lastName'
             initialValue={lastName || ''}
@@ -47,6 +51,7 @@ const UserHero = props => {
             className='input-form user-hero__content__email'
             collectionName='users'
             entityId={id}
+            isFrozen={isFrozen}
             label='Email'
             name='local.email'
             initialValue={email || ''}
@@ -61,4 +66,4 @@ const UserHero = props => {
   )
 }
 
-export default UserHero
+export default withState(UserHero)

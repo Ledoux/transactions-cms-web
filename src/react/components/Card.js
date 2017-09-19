@@ -1,13 +1,12 @@
 import React from 'react'
-import { Card as withState } from 'transactions-cms-state'
 
 import Control from './Control'
 
 const Card = ({ api,
   entity,
-  ChildComponent
+  ContentComponent
 }) => {
-  const WrappedComponent = ChildComponent.WrappedComponent || ChildComponent
+  const WrappedComponent = ContentComponent.WrappedComponent || ContentComponent
   if (!WrappedComponent) {
     console.warn('Did not find WrappedComponent in Card')
     return
@@ -16,11 +15,11 @@ const Card = ({ api,
   return (
     <div className='card'>
       { isControl && <Control /> }
-      <ChildComponent api={api}
+      <ContentComponent api={api}
         {...entity}
       />
     </div>
   )
 }
 
-export default withState(Card)
+export default Card

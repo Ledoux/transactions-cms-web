@@ -7,10 +7,8 @@ import Explore from '../components/Explore'
 const ContentPage = ({ api,
   collectionName,
   entityName,
-  entityOrCollectionName,
   isEdit,
   isEntityName,
-  modeName,
   slug,
 }) => {
   const label = `content-${collectionName}`
@@ -24,11 +22,7 @@ const ContentPage = ({ api,
       {
         entityName && <TaskComponent
           api={api}
-          collectionName={collectionName}
-          entityName={entityName}
-          isEdit={isEdit}
           label={label}
-          modeName={modeName}
           options={options}
           slug={slug}
         />

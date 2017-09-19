@@ -36,8 +36,7 @@ const Explore = ({ extra,
           <div className={classnames('explore__search', {
               'explore__search--shrinked': isShrinked
           })}>
-            <Search
-              exploreState={state}
+            <Search exploreState={state}
               getRequestQuery={getRequestQuery}
               interactions={interactions}
               inputTemplate={inputTemplate}
@@ -60,7 +59,7 @@ const Explore = ({ extra,
                   'explore__collections__child--selected': isSelected
                 })}
                 key={index}
-                onClick={onSelectionClick}
+                onClick={() => onSelectionClick(index)}
               >
                 { collectionName }
               </Button>

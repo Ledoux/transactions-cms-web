@@ -30,8 +30,7 @@ const Item = props => {
           <div className={classnames('item__left-interaction col', {
               'item__left-interaction--shrinked': isShrinked
             })}>
-            <LeftInteractionComponent
-              exploreState={exploreState}
+            <LeftInteractionComponent exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
               {...interactionExtraProps}
@@ -62,8 +61,7 @@ const Item = props => {
           <div className={classnames('item__right-interaction ', {
               'item__right-interaction--shrinked': isShrinked
             })}>
-            <RightInteractionComponent
-              exploreState={exploreState}
+            <RightInteractionComponent exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
               {...interactionExtraProps}
@@ -74,8 +72,7 @@ const Item = props => {
       {
         BottomInteractionComponent && (
           <div className='item__bottom-interaction'>
-            <BottomInteractionComponent
-              exploreState={exploreState}
+            <BottomInteractionComponent exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
               {...interactionExtraProps}

@@ -5,19 +5,16 @@ import { Check as withState } from 'transactions-cms-state'
 import Card from './Card'
 
 // this is where one entity edition/post can be done
-const Check = ({
-  api,
-  collectionName,
+const Check = ({ api,
   ContentComponent,
   entity,
   entityName,
   isNew,
-  isNotPipelinedYet,
-  pipelineEntity,
+  mergeEntity,
   slug
 }) => {
   let warningMessage
-  if (!isNew && !isNotPipelinedYet && !entity) {
+  if (!isNew && !entity) {
     warningMessage = `Warning, we did not find a good entity with the slug ${slug}`
   }
   if (typeof ContentComponent === 'undefined') {
@@ -27,13 +24,9 @@ const Check = ({
     <div className='check'>
       <div className='check__content'>
         {
-          !warningMessage && ContentComponent && <Card
-            api={api}
-            collectionName={collectionName}
-            entity={entity}
-            entityName={entityName}
-            ChildComponent={ContentComponent}
-            isNew={isNew}
+          !warningMessage && ContentComponent && <Card api={api}
+            entity={mergeEntity || entity}
+            ContentComponent={ContentComponent}
             isTitle
           />
         }
