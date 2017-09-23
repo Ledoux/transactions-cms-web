@@ -27,6 +27,7 @@ const Check = ({ api,
           !warningMessage && ContentComponent && <Card api={api}
             entity={mergeEntity || entity}
             ContentComponent={ContentComponent}
+            isChecked
             isTitle
           />
         }

@@ -66,26 +66,6 @@
       margin-bottom: 0.5rem;
       text-align: left; }
 
-.input-form {
-  margin-bottom: 0.5rem; }
-  .input-form__title {
-    margin-bottom: 0.25rem; }
-    .input-form__title__label {
-      color: #777777;
-      font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
-      font-weight: bold; }
-  .input-form__content__input {
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
-    color: #777777;
-    letter-spacing: 0.5px;
-    font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
-    font-size: 14px;
-    height: 2rem;
-    width: 100%; }
-    .input-form__content__input:focus {
-      outline: none; }
-
 .item {
   background-color: white;
   border: 1px solid #fcfcfc;
@@ -225,6 +205,54 @@
     @media (min-width: 52em) {
       .admin-dashboard__users {
         height: 40rem; } }
+
+.input-form {
+  margin-bottom: 0.5rem; }
+  .input-form__title {
+    margin-bottom: 0.25rem; }
+    .input-form__title__label {
+      color: #777777;
+      font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
+      font-weight: bold; }
+  .input-form__content__input {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    color: #777777;
+    letter-spacing: 0.5px;
+    font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    height: 2rem;
+    width: 100%; }
+    .input-form__content__input:focus {
+      outline: none; }
+
+.toggles-form {
+  border-bottom: 1px solid #dcdddc;
+  font-size: 14px;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  padding-left: 5%;
+  padding-top: 2rem;
+  width: 100%; }
+  @media (min-width: 52em) {
+    .toggles-form {
+      padding-left: 3%; } }
+  .toggles-form__title {
+    color: #c5c5c5;
+    margin-bottom: 1rem; }
+  .toggles-form__labels {
+    color: #4a4a4a;
+    font-weight: 500;
+    margin-left: 5%; }
+    .toggles-form__labels__item {
+      margin-bottom: 1rem;
+      transition: all 0.4s ease-out; }
+      .toggles-form__labels__item--selected {
+        color: #33aece;
+        background-color: white;
+        opacity: 1; }
+      .toggles-form__labels__item__input {
+        margin-right: 1rem; }
 
 .check-interaction {
   background: transparent;

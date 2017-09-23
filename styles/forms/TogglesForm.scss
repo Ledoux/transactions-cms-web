@@ -1,0 +1,33 @@
+.toggles-form {
+  border-bottom: 1px solid $medium-grey;
+  font-size: 14px;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  padding-left: 5%;
+  padding-top: 2rem;
+  width: 100%;
+  @media (min-width: $md) {
+    padding-left: 3%;
+  }
+  &__title {
+    color: $light-font-color;
+    margin-bottom: 1rem;
+  }
+  &__labels {
+    color: $dark-font-color;
+    font-weight: 500;
+    margin-left: 5%;
+    &__item {
+      margin-bottom: 1rem;
+      transition: all 0.4s ease-out;
+      &--selected {
+        color: $medium-blue;
+        background-color: white;
+        opacity: 1;
+      }
+      &__input {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
