@@ -39,7 +39,7 @@ const TogglesForm = props => {
                         'toggles-form__labels__item__input', {
                         'toggles-form__labels__item__input--disabled': isFrozen
                       })}
-                      checked={isSelected}
+                      defaultChecked={isSelected}
                       disabled={isFrozen}
                       onClick={() => onToggleClick(id)}
                       readOnly

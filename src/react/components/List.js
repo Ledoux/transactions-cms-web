@@ -10,6 +10,7 @@ const List = ({ BottomInteractionComponent,
   collectionName,
   ContentComponent,
   entities,
+  entityName,
   exploreState,
   extraProps,
   inputTemplate,
@@ -22,10 +23,8 @@ const List = ({ BottomInteractionComponent,
   maxDisplayCount,
   onExploreChange,
   placeholder,
-  RightInteractionComponent,
-  state
+  RightInteractionComponent
 }) => {
-  const { entityName } = state
   let warningMessage
   const entitiesLength = entities && entities.length
   if (collectionName && entitiesLength > 0) {
@@ -55,6 +54,7 @@ const List = ({ BottomInteractionComponent,
                   ContentComponent={ContentComponent}
                   BottomInteractionComponent={BottomInteractionComponent}
                   entity={entity}
+                  entityName={entityName}
                   extraProps={extraProps}
                   exploreState={exploreState}
                   interactionExtraProps={interactionExtraProps}
