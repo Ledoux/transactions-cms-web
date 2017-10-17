@@ -21,9 +21,7 @@ const Explore = ({ extra,
   placeholder,
   state
 }) => {
-  const { explore,
-    selectedIndexes
-  } = state
+  const { selectedIndexes } = state
   const selectedOptions = selectedIndexes.map(selectedIndex =>
     options[selectedIndex])
   selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
@@ -44,8 +42,7 @@ const Explore = ({ extra,
               label={label}
               onExploreChange={onExploreChange}
               options={selectedOptions}
-              placeholder={placeholder}
-            />
+              placeholder={placeholder} />
           </div>
         )
       }
@@ -54,13 +51,11 @@ const Explore = ({ extra,
           isSelection && options.map(({ collectionName }, index) => {
             const isSelected = selectedIndexes.includes(index)
             return (
-              <Button
-                className={classnames('button button--alive explore__collections__child', {
+              <Button className={classnames('button button--alive explore__collections__child', {
                   'explore__collections__child--selected': isSelected
                 })}
                 key={index}
-                onClick={() => onSelectionClick(index)}
-              >
+                onClick={() => onSelectionClick(index)} >
                 { collectionName }
               </Button>
             )
@@ -73,14 +68,14 @@ const Explore = ({ extra,
         {
           isLists && selectedOptions.map((selectedOption, index) => {
             return (
-              <div
-                className='explore__lists__child'
-                key={index}
-              >
+              <div className='explore__lists__child'
+                key={index} >
                 {
-                  isSelection && <p className='explore__lists__child__title'>
-                    {selectedOption.collectionName}
-                  </p>
+                  isSelection && (
+                    <p className='explore__lists__child__title'>
+                      {selectedOption.collectionName}
+                    </p>
+                  )
                 }
                 <List collectionName={selectedOption.collectionName}
                   exploreState={state}
@@ -89,8 +84,7 @@ const Explore = ({ extra,
                   isSmall={isSmall}
                   label={label}
                   onExploreChange={onExploreChange}
-                  {...selectedOption}
-                />
+                  {...selectedOption} />
               </div>
             )
           })

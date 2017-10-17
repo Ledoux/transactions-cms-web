@@ -3,12 +3,11 @@ import React from 'react'
 import { List as withState } from 'transactions-cms-state'
 import { Warning } from 'transactions-interface-web'
 
-import Item from './Item'
+import Item from '../containers/Item'
 import Search from './Search'
 
-const List = ({ BottomInteractionComponent,
+const List = ({ bottomInteractionName,
   collectionName,
-  ContentComponent,
   entities,
   entityName,
   exploreState,
@@ -19,19 +18,15 @@ const List = ({ BottomInteractionComponent,
   isShrinked,
   isSmall,
   label,
-  LeftInteractionComponent,
+  leftInteractionName,
   maxDisplayCount,
   onExploreChange,
   placeholder,
-  RightInteractionComponent
+  rightInteractionName
 }) => {
   let warningMessage
   const entitiesLength = entities && entities.length
-  if (collectionName && entitiesLength > 0) {
-    if (typeof ContentComponent === 'undefined') {
-      warningMessage = `Warning, there is no a defined Item Component for ${collectionName}`
-    }
-  } else {
+  if (!collectionName || entitiesLength === 0) {
     warningMessage = `No ${collectionName} found`
   }
   const displayedLength = Math.min(maxDisplayCount, entitiesLength)
@@ -42,8 +37,7 @@ const List = ({ BottomInteractionComponent,
       'list--shrinked': isShrinked
     })}>
       {
-        ContentComponent && entities && entities
-          .slice(0, displayedLength)
+        entities && entities.slice(0, displayedLength)
           .map((entity, index) => (
             <div className={classnames('list__child', {
                 'list__child--shrinked': isShrinked,
@@ -51,8 +45,8 @@ const List = ({ BottomInteractionComponent,
               })}
               key={index}>
                 <Item collectionName={collectionName}
-                  ContentComponent={ContentComponent}
-                  BottomInteractionComponent={BottomInteractionComponent}
+                  contentName={collectionName}
+                  bottomInteractionName={bottomInteractionName}
                   entity={entity}
                   entityName={entityName}
                   extraProps={extraProps}
@@ -61,10 +55,9 @@ const List = ({ BottomInteractionComponent,
                   isLast={index === displayedLength - 1}
                   isShrinked={isShrinked}
                   isSmall={isSmall}
-                  LeftInteractionComponent={LeftInteractionComponent}
+                  leftInteractionName={leftInteractionName}
                   onExploreChange={onExploreChange}
-                  RightInteractionComponent={RightInteractionComponent}
-                />
+                  rightInteractionName={rightInteractionName} />
             </div>
           )
         )
@@ -89,7 +82,7 @@ const List = ({ BottomInteractionComponent,
         )
       }
       {
-        ContentComponent && isMore && (
+        isMore && isSearch && (
           <div className={classnames('list__child', {
               'list__child--shrinked': isShrinked,
               'list__child--shrinked--last': true,
@@ -102,8 +95,7 @@ const List = ({ BottomInteractionComponent,
                 isShrinked={isShrinked}
                 isSmall
                 onExploreChange={onExploreChange}
-                text={`Precise your search if you want to find other matching ${collectionName}`}
-              />
+                text={`Precise your search if you want to find other matching ${collectionName}`} />
           </div>
         )
       }

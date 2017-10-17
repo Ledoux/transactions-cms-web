@@ -20,8 +20,7 @@ const ContentPage = ({ api,
   return (
     <main className='main page content-page'>
       {
-        entityName && <TaskComponent
-          api={api}
+        entityName && <TaskComponent api={api}
           label={label}
           options={options}
           slug={slug}

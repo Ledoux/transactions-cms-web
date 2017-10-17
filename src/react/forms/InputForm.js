@@ -15,9 +15,9 @@ const InputForm = ({ className,
   name,
   state,
   slug,
+  value,
   valueItemProp
 }) => {
-  let { value } = state
   if (typeof value !== 'string') {
     value = initialValue || ''
   }
@@ -28,8 +28,7 @@ const InputForm = ({ className,
     <div className={ className || 'input-form' }
       itemProp={itemProp}
       itemScope={itemScope}
-      itemType={itemType}
-    >
+      itemType={itemType} >
       {
         !isFrozen && (
           <div className='input-form__title'>
@@ -47,21 +46,18 @@ const InputForm = ({ className,
           ? <div dangerouslySetInnerHTML={{ __html: value }} />
           : (
               <p className='input-form__content__text'
-                itemProp={valueItemProp}
-              >
+                itemProp={valueItemProp} >
                 {value}
               </p>
             )
         )
-        : <DebounceInput
-            className='input-form__content__input'
+        : <DebounceInput className='input-form__content__input'
             debounceTimeout={500}
             name={name}
             type='text'
             onChange={event => handleChangeValue(event)}
             required
-            value={value}
-          />
+            value={value} />
       }
     </div>
   </div>

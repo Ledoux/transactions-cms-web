@@ -7,6 +7,7 @@ const RadiosForm = props => {
     entities,
     isConclusion,
     isFrozen,
+    maxEvaluationValue,
     onMouseEnter,
     onMouseLeave,
     onRadioClick,
@@ -14,7 +15,6 @@ const RadiosForm = props => {
     state,
     title
   } = props
-  const { maxEvaluationValue } = state
   return (
     <div className='radios-form'
       onMouseLeave={onMouseLeave} >

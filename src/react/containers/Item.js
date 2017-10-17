@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
+import { Item as withState } from 'transactions-cms-state'
 
 const Item = props => {
   const { BottomInteractionComponent,
@@ -84,4 +85,4 @@ const Item = props => {
   )
 }
 
-export default Item
+export default withState(Item)

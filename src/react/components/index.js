@@ -1,22 +1,18 @@
-import Card from './Card'
 import Check from './Check'
 import Control from './Control'
 import EditButton from './EditButton'
 import Explore from './Explore'
-import Item from './Item'
 import List from './List'
 import Search from './Search'
+import Selection from './Selection'
 import SubmitButton from './SubmitButton'
-import UserHero from './UserHero'
 
-export { Card,
-  Check,
+export { Check,
   Control,
   EditButton,
   Explore,
-  Item,
   List,
   Search,
-  SubmitButton,
-  UserHero
+  Selection,
+  SubmitButton
 }
