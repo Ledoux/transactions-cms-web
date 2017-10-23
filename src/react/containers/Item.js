@@ -24,18 +24,18 @@ const Item = props => {
     <div className={classnames(className || `item item--${entityName}`, {
       'item--shrinked': isShrinked,
       'item--shrinked--last': isShrinked && isLast,
-      'item--small': isSmall
-    })}>
+      'item--small': isSmall})} >
       {
         LeftInteractionComponent && (
           <div className={classnames('item__left-interaction col', {
               'item__left-interaction--shrinked': isShrinked
             })}>
-            <LeftInteractionComponent exploreState={exploreState}
+            <LeftInteractionComponent collectionName={collectionName}
+              entityName={entityName}
+              exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
-              {...interactionExtraProps}
-            />
+              {...interactionExtraProps} />
           </div>
         )
       }
@@ -44,10 +44,8 @@ const Item = props => {
         'item__content--text flex items-center': text })
       }>
         {
-          ContentComponent && <ContentComponent
-            {...entity}
-            {...extraProps}
-          />
+          ContentComponent && <ContentComponent {...entity}
+            {...extraProps} />
         }
         {
           text && (
@@ -62,7 +60,9 @@ const Item = props => {
           <div className={classnames('item__right-interaction ', {
               'item__right-interaction--shrinked': isShrinked
             })}>
-            <RightInteractionComponent exploreState={exploreState}
+            <RightInteractionComponent collectionName={collectionName}
+              entityName={entityName}
+              exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
               {...interactionExtraProps}
@@ -73,7 +73,9 @@ const Item = props => {
       {
         BottomInteractionComponent && (
           <div className='item__bottom-interaction'>
-            <BottomInteractionComponent exploreState={exploreState}
+            <BottomInteractionComponent collectionName={collectionName}
+              entityName={entityName}
+              exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
               {...interactionExtraProps}
