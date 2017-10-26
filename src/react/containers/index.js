@@ -1,6 +1,6 @@
-import Card from './Card'
-import Item from './Item'
+import CardContainer from './CardContainer'
+import ItemContainer from './ItemContainer'
 
-export { Card,
-  Item
+export { CardContainer,
+  ItemContainer
 }

@@ -1,8 +1,8 @@
 import classnames from 'classnames'
 import React from 'react'
-import { Item as withState } from 'transactions-cms-state'
+import { ItemContainer as withState } from 'transactions-cms-state'
 
-const Item = props => {
+const ItemContainer = props => {
   const { BottomInteractionComponent,
     className,
     collectionName,
@@ -20,15 +20,16 @@ const Item = props => {
     RightInteractionComponent,
     text
   } = props
+  console.log('extraProps', extraProps)
   return (
-    <div className={classnames(className || `item item--${entityName}`, {
-      'item--shrinked': isShrinked,
-      'item--shrinked--last': isShrinked && isLast,
-      'item--small': isSmall})} >
+    <div className={classnames(className || `item-container item-container--${entityName}`, {
+      'item-container--shrinked': isShrinked,
+      'item-container--shrinked--last': isShrinked && isLast,
+      'item-container--small': isSmall})} >
       {
         LeftInteractionComponent && (
-          <div className={classnames('item__left-interaction col', {
-              'item__left-interaction--shrinked': isShrinked
+          <div className={classnames('item-container__left-interaction col', {
+              'item-container__left-interaction--shrinked': isShrinked
             })}>
             <LeftInteractionComponent collectionName={collectionName}
               entityName={entityName}
@@ -39,17 +40,13 @@ const Item = props => {
           </div>
         )
       }
-      <div className={classnames('item__content', {
+      <div className={classnames('item-container__content', {
         'col': LeftInteractionComponent,
-        'item__content--text flex items-center': text })
-      }>
-        {
-          ContentComponent && <ContentComponent {...entity}
-            {...extraProps} />
-        }
+        'item-container__content--text flex items-center': text })}>
+        { ContentComponent && <ContentComponent {...entity} {...extraProps} /> }
         {
           text && (
-            <p className='item__content__text'>
+            <p className='item-container__content__text'>
               {text}
             </p>
           )
@@ -57,29 +54,27 @@ const Item = props => {
       </div>
       {
         RightInteractionComponent && (
-          <div className={classnames('item__right-interaction ', {
-              'item__right-interaction--shrinked': isShrinked
+          <div className={classnames('item-container__right-interaction ', {
+              'item-container__right-interaction--shrinked': isShrinked
             })}>
             <RightInteractionComponent collectionName={collectionName}
               entityName={entityName}
               exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
-              {...interactionExtraProps}
-            />
+              {...interactionExtraProps} />
           </div>
         )
       }
       {
         BottomInteractionComponent && (
-          <div className='item__bottom-interaction'>
+          <div className='item-container__bottom-interaction'>
             <BottomInteractionComponent collectionName={collectionName}
               entityName={entityName}
               exploreState={exploreState}
               onExploreChange={onExploreChange}
               {...entity}
-              {...interactionExtraProps}
-            />
+              {...interactionExtraProps} />
           </div>
         )
       }
@@ -87,4 +82,4 @@ const Item = props => {
   )
 }
 
-export default withState(Item)
+export default withState(ItemContainer)

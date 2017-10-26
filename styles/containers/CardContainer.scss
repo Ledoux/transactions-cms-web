@@ -1,0 +1,15 @@
+.card-container {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  @media (min-width: $md) {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  &--border {
+    border: 1px solid $light-grey;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    min-height: 75%;
+    min-width: 75%;
+  }
+}

@@ -3,7 +3,7 @@ import React from 'react'
 import { List as withState } from 'transactions-cms-state'
 import { Warning } from 'transactions-interface-web'
 
-import Item from '../containers/Item'
+import ItemContainer from '../containers/ItemContainer'
 import Search from './Search'
 
 const List = ({ bottomInteractionName,
@@ -44,7 +44,7 @@ const List = ({ bottomInteractionName,
                 'list__child--small': isSmall
               })}
               key={index}>
-                <Item collectionName={collectionName}
+                <ItemContainer collectionName={collectionName}
                   contentName={collectionName}
                   bottomInteractionName={bottomInteractionName}
                   entity={entity}
@@ -70,7 +70,7 @@ const List = ({ bottomInteractionName,
               'list__child--small': isSmall
             })}
             key='more-item'>
-              <Item collectionName={collectionName}
+              <ItemContainer collectionName={collectionName}
                 exploreState={exploreState}
                 isLast
                 isShrinked={isShrinked}
@@ -89,7 +89,7 @@ const List = ({ bottomInteractionName,
               'list__child--small': isSmall
             })}
             key='more-item'>
-              <Item collectionName={collectionName}
+              <ItemContainer collectionName={collectionName}
                 exploreState={exploreState}
                 isLast
                 isShrinked={isShrinked}

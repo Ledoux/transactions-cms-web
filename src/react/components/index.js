@@ -5,6 +5,7 @@ import Explore from './Explore'
 import List from './List'
 import Search from './Search'
 import Selection from './Selection'
+import Stream from './Stream'
 import SubmitButton from './SubmitButton'
 
 export { Check,
@@ -14,5 +15,6 @@ export { Check,
   List,
   Search,
   Selection,
+  Stream,
   SubmitButton
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Warning } from 'transactions-interface-web'
 import { Check as withState } from 'transactions-cms-state'
 
-import Card from '../containers/Card'
+import CardContainer from '../containers/CardContainer'
 
 // this is where one entity edition/post can be done
 const Check = ({ api,
@@ -20,7 +20,7 @@ const Check = ({ api,
     <div className='check'>
       <div className='check__content'>
         {
-          !warningMessage && <Card api={api}
+          !warningMessage && <CardContainer api={api}
             contentName={entityName}
             entity={mergeEntity || entity}
             isChecked

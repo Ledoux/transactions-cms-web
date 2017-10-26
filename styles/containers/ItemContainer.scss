@@ -1,4 +1,4 @@
-.item {
+.item-container {
   background-color: white;
   border: 1px solid $light-grey;
   border-radius: $border-radius;
@@ -11,7 +11,7 @@
   transition: $transition;
   &--shrinked {
     border: 0;
-    border-bottom: 1px solid $medium-grey;
+    border-bottom: 1px solid $light-grey;
     border-radius: 0;
     box-shadow: none;
     &--last {
@@ -43,6 +43,6 @@
     }
   }
   &__bottom-interaction {
-    border-top: 1px solid $medium-grey;
+    border-top: 1px solid $light-grey;
   }
 }

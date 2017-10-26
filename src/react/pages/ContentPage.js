@@ -23,8 +23,7 @@ const ContentPage = ({ api,
         entityName && <TaskComponent api={api}
           label={label}
           options={options}
-          slug={slug}
-        />
+          slug={slug} />
       }
     </main>
   )

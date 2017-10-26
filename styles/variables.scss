@@ -1,9 +1,16 @@
 // Breakpoints
+/*
 $mini: 30em !default;
 $sm: 40em !default; //648px
 $md: 52em !default;
 $lg: 64em !default; // 1280px;
 $xl: 75em !default;
+*/
+$mini: 425px !default;
+$sm: 768px !default;
+$md: 1024px !default;
+$lg: 1440px !default;
+$xl: 2560px !default;
 
 // Variables
 $border-radius: 0.25rem !default;
@@ -16,3 +23,4 @@ $light-font-color: $pastel-grey !default;
 $middle-font-color: $middle-grey !default;
 $dark-font-color: $dark-grey !default;
 $transition: all 0.4s ease-out !default;
+$opacity-transition: all 1s ease-out !default;
