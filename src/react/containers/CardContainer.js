@@ -4,19 +4,20 @@ import { CardContainer as withState } from 'transactions-cms-state'
 
 import Control from '../components/Control'
 
-const CardContainer = ({ entity,
-  entityId,
-  entityName,
+const CardContainer = ({ contentName,
   ContentComponent,
+  entity,
+  entityId,
+  extraProps,
   isBorder,
   isControl
 }) => {
   return (
-    <div className={classnames(`card-container card-container--${entityName}`, {
+    <div className={classnames(`card-container card-container--${contentName}`, {
         'card-container--border': isBorder
       })}>
       { isControl && <Control /> }
-      <ContentComponent id={entityId} {...entity} />
+      <ContentComponent id={entityId} {...entity} {...extraProps} />
     </div>
   )
 }

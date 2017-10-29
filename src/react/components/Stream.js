@@ -7,6 +7,7 @@ import CardContainer from '../containers/CardContainer'
 const Stream = ({ className,
   contentName,
   entities,
+  extraProps,
   isBorder,
   selectedIndex
 }) => {
@@ -14,11 +15,12 @@ const Stream = ({ className,
     <div className={className || 'stream'}>
       {
         entities && entities.map((entity, index) => (
-          <div key={index} className={classnames('stream__element', {
+          <div key={index} className={classnames('stream__element flex items-center justify-center', {
               'stream__element--selected': index === selectedIndex
             })} >
             <CardContainer contentName={contentName}
               entity={entity}
+              extraProps={Object.assign({ isHalfSize: true }, extraProps)}
               isBorder />
           </div>
         ))

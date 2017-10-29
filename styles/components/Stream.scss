@@ -3,11 +3,11 @@
   width: 100%;
   position: relative;
   &__element {
+    height: 100%;
     opacity: 0;
     position: absolute;
-    top: 0;
-    left: 0;
     transition: $opacity-transition;
+    width: 100%;
     &--selected {
       opacity: 1;
       transition: $opacity-transition;

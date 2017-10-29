@@ -9,7 +9,15 @@
     border: 1px solid $light-grey;
     border-radius: $border-radius;
     box-shadow: $box-shadow;
-    min-height: 75%;
-    min-width: 75%;
+    width: 65%;
+    @media (min-width: $sm) {
+      height: 100%;
+      width: 60%;
+    }
+    @media (min-width: $md) {
+      height: 92.5%;
+      width: 92.5%;
+    }
+    // padding: 2rem;
   }
 }

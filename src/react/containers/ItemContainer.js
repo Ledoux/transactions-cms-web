@@ -20,7 +20,6 @@ const ItemContainer = props => {
     RightInteractionComponent,
     text
   } = props
-  console.log('extraProps', extraProps)
   return (
     <div className={classnames(className || `item-container item-container--${entityName}`, {
       'item-container--shrinked': isShrinked,

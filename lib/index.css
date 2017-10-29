@@ -138,11 +138,11 @@ $xl: 75em !default;
   width: 100%;
   position: relative; }
   .stream__element {
+    height: 100%;
     opacity: 0;
     position: absolute;
-    top: 0;
-    left: 0;
-    transition: all 1s ease-out; }
+    transition: all 1s ease-out;
+    width: 100%; }
     .stream__element--selected {
       opacity: 1;
       transition: all 1s ease-out; }
@@ -168,8 +168,15 @@ $xl: 75em !default;
     border: 1px solid #fcfcfc;
     border-radius: 0.25rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    min-height: 75%;
-    min-width: 75%; }
+    width: 65%; }
+    @media (min-width: 768px) {
+      .card-container--border {
+        height: 100%;
+        width: 60%; } }
+    @media (min-width: 1024px) {
+      .card-container--border {
+        height: 92.5%;
+        width: 92.5%; } }
 
 .item-container {
   background-color: white;
@@ -266,7 +273,8 @@ $xl: 75em !default;
       padding-left: 3%; } }
   .toggles-form__title {
     color: #c5c5c5;
-    margin-bottom: 1rem; }
+    margin-bottom: 1rem;
+    width: 50%; }
   .toggles-form__labels {
     color: #4a4a4a;
     font-weight: 500;
