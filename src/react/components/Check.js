@@ -5,8 +5,7 @@ import { Check as withState } from 'transactions-cms-state'
 import CardContainer from '../containers/CardContainer'
 
 // this is where one entity edition/post can be done
-const Check = ({ api,
-  entity,
+const Check = ({ entity,
   entityName,
   isNew,
   mergeEntity,
@@ -18,16 +17,13 @@ const Check = ({ api,
   }
   return (
     <div className='check'>
-      <div className='check__content'>
-        {
-          !warningMessage && <CardContainer api={api}
-            contentName={entityName}
-            entity={mergeEntity || entity}
-            isChecked
-            isTitle />
-        }
-        { warningMessage && <Warning text={warningMessage} /> }
-      </div>
+      {
+        !warningMessage && <CardContainer contentName={entityName}
+          entity={mergeEntity || entity}
+          isChecked
+          isTitle />
+      }
+      { warningMessage && <Warning text={warningMessage} /> }
     </div>
   )
 }

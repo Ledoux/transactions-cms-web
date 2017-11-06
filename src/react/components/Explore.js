@@ -4,22 +4,17 @@ import { Explore as withState } from 'transactions-cms-state'
 import { Button } from 'transactions-interface-web'
 
 import List from './List'
-import Search from './Search'
+import Control from './Control'
 
-const Explore = ({ extra,
-  getRequestQuery,
-  inputTemplate,
-  interactions,
-  isAdd,
-  isSearch,
+const Explore = ({ control,
+  isControl,
   isShrinked,
   isSmall,
-  label,
   onExploreChange,
   onSelectionClick,
   options,
-  placeholder,
-  state
+  state,
+  tag
 }) => {
   const { selectedIndexes } = state
   const selectedOptions = selectedIndexes.map(selectedIndex =>
@@ -29,23 +24,15 @@ const Explore = ({ extra,
   const isLists = selectedOptions.length > 0
   return (
     <div className='explore'>
-      {
-        isSearch && (
-          <div className={classnames('explore__search', {
-              'explore__search--shrinked': isShrinked
-          })}>
-            <Search exploreState={state}
-              getRequestQuery={getRequestQuery}
-              interactions={interactions}
-              inputTemplate={inputTemplate}
-              isAdd
-              label={label}
-              onExploreChange={onExploreChange}
-              options={selectedOptions}
-              placeholder={placeholder} />
-          </div>
-        )
-      }
+      <div className={classnames('explore__control', {
+        'explore__control--shrinked': isShrinked
+      })}>
+        <Control exploreState={state}
+          onExploreChange={onExploreChange}
+          options={selectedOptions}
+          tag={tag}
+          {...control} />
+      </div>
       <div className='explore__collections flex flex-wrap'>
         {
           isSelection && options.map(({ collectionName }, index) => {
@@ -79,10 +66,9 @@ const Explore = ({ extra,
                 }
                 <List collectionName={selectedOption.collectionName}
                   exploreState={state}
-                  isSearch={isSearch}
+                  isControl
                   isShrinked={isShrinked}
                   isSmall={isSmall}
-                  label={label}
                   onExploreChange={onExploreChange}
                   {...selectedOption} />
               </div>

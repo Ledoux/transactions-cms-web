@@ -12,26 +12,71 @@ $xl: 75em !default;
     .check {
       padding-left: 5%;
       padding-right: 5%; } }
-  .check__content {
-    padding-top: 1rem; }
 
 .control {
-  position: fixed;
-  left: 45%;
-  top: 1.5rem;
-  z-index: 1001; }
+  height: 3rem; }
+  .control__button {
+    background: transparent;
+    border: 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    height: 100%;
+    transition: all 0.4s ease-out; }
+    @media (min-width: 1024px) {
+      .control__button {
+        width: 8.33333%; } }
+    @media (min-width: 1024px) {
+      .control__button--small {
+        width: 16.66667%; } }
+    .control__button:focus {
+      outline: none; }
+    .control__button svg {
+      fill: #33aece;
+      height: 2rem;
+      width: 2rem; }
+  .control__input {
+    background: transparent;
+    border: 0;
+    border-radius: 0.25rem;
+    color: #777777;
+    padding-left: 0.5rem;
+    font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    height: 100%;
+    font-size: 14px; }
+    .control__input--small {
+      width: auto; }
+      @media (min-width: 1024px) {
+        .control__input--small {
+          padding-left: 0; } }
+    .control__input:focus {
+      outline: none; }
+    .control__input::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: #c5c5c5; }
+    .control__input:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: #c5c5c5;
+      opacity: 1; }
+    .control__input::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: #c5c5c5;
+      opacity: 1; }
+    .control__input:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #c5c5c5; }
 
 .explore {
   height: 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   text-align: center; }
-  .explore__search {
+  .explore__control {
     margin-bottom: 1rem;
     background-color: white;
     border-radius: 0.25rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
-    .explore__search--shrinked {
+    .explore__control--shrinked {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       margin-bottom: 0; }
@@ -168,14 +213,12 @@ $xl: 75em !default;
     border: 1px solid #fcfcfc;
     border-radius: 0.25rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    width: 65%; }
-    @media (min-width: 768px) {
+    width: 95%; }
+    @media (min-width: 425px) {
       .card-container--border {
-        height: 100%;
-        width: 60%; } }
+        width: 65%; } }
     @media (min-width: 1024px) {
       .card-container--border {
-        height: 92.5%;
         width: 92.5%; } }
 
 .item-container {

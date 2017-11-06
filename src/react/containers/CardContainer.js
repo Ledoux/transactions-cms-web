@@ -4,7 +4,8 @@ import { CardContainer as withState } from 'transactions-cms-state'
 
 import Control from '../components/Control'
 
-const CardContainer = ({ contentName,
+const CardContainer = ({ collectionName,
+  contentName,
   ContentComponent,
   entity,
   entityId,
@@ -17,7 +18,10 @@ const CardContainer = ({ contentName,
         'card-container--border': isBorder
       })}>
       { isControl && <Control /> }
-      <ContentComponent id={entityId} {...entity} {...extraProps} />
+      <ContentComponent collectionName={collectionName}
+        id={entityId}
+        {...entity}
+        {...extraProps} />
     </div>
   )
 }

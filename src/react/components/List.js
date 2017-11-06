@@ -4,7 +4,6 @@ import { List as withState } from 'transactions-cms-state'
 import { Warning } from 'transactions-interface-web'
 
 import ItemContainer from '../containers/ItemContainer'
-import Search from './Search'
 
 const List = ({ bottomInteractionName,
   collectionName,
@@ -32,10 +31,10 @@ const List = ({ bottomInteractionName,
   const displayedLength = Math.min(maxDisplayCount, entitiesLength)
   const isNotTotal = maxDisplayCount && entitiesLength > maxDisplayCount
   const isMore = maxDisplayCount && isNotTotal
+
   return (
     <div className={classnames('list', {
-      'list--shrinked': isShrinked
-    })}>
+      'list--shrinked': isShrinked })}>
       {
         entities && entities.slice(0, displayedLength)
           .map((entity, index) => (
@@ -76,8 +75,7 @@ const List = ({ bottomInteractionName,
                 isShrinked={isShrinked}
                 isSmall
                 onExploreChange={onExploreChange}
-                text={warningMessage}
-              />
+                text={warningMessage} />
           </div>
         )
       }
