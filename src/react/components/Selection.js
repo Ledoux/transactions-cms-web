@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Explore from './Explore'
+import Explore from '../tasks/Explore'
 
 const Selection = ({ selectedExplore,
   selectingExplore

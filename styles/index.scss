@@ -1,10 +1,12 @@
 @import 'colors.scss';
 @import 'variables.scss';
-@import './components/index.scss';
+@import './buttons/index.scss';
 @import './cards/index.scss';
-@import './containers/index.scss';
+@import './components/index.scss';
 @import './dashboards/index.scss';
+@import './decorators/index.scss';
 @import './forms/index.scss';
 @import './interactions/index.scss';
 @import './items/index.scss';
 @import './pages/index.scss';
+@import './tasks/index.scss';

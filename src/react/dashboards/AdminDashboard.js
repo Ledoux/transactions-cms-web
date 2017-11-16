@@ -1,7 +1,7 @@
 import React from 'react'
 import { Title } from 'transactions-interface-web'
 
-import Explore from '../components/Explore'
+import Explore from '../tasks/Explore'
 
 const usersExploreOptions = [{ collectionName: 'users',
   maxDisplayCount: 3,

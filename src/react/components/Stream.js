@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import React from 'react'
 import { Stream as withState } from 'transactions-cms-state'
 
-import CardContainer from '../containers/CardContainer'
+import CardDecorator from '../decorators/CardDecorator'
 
 const Stream = ({ className,
   contentName,
@@ -18,7 +18,7 @@ const Stream = ({ className,
           <div key={index} className={classnames('stream__element flex items-center justify-center', {
               'stream__element--selected': index === selectedIndex
             })} >
-            <CardContainer contentName={contentName}
+            <CardDecorator contentName={contentName}
               entity={entity}
               extraProps={Object.assign({ isHalfSize: true }, extraProps)}
               isBorder />

@@ -1,0 +1,8 @@
+.pick {
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  @media (min-width: $md) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

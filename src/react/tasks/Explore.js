@@ -3,8 +3,8 @@ import React from 'react'
 import { Explore as withState } from 'transactions-cms-state'
 import { Button } from 'transactions-interface-web'
 
-import List from './List'
-import Control from './Control'
+import Control from '../components/Control'
+import List from '../components/List'
 
 const Explore = ({ control,
   isControl,
@@ -21,7 +21,7 @@ const Explore = ({ control,
     options[selectedIndex])
   selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
   const isSelection = options && options.length > 1
-  const isLists = selectedOptions.length > 0
+  const isEmpty = selectedOptions.length === 0
   return (
     <div className='explore'>
       <div className={classnames('explore__control', {
@@ -49,17 +49,17 @@ const Explore = ({ control,
           })
         }
       </div>
-      <div className={classnames('explore__lists', {
-        'explore__lists--shrinked': isShrinked
+      <div className={classnames('explore__items-containers', {
+        'explore__items-containers--shrinked': isShrinked
       })}>
         {
-          isLists && selectedOptions.map((selectedOption, index) => {
+          !isEmpty && selectedOptions.map((selectedOption, index) => {
             return (
-              <div className='explore__lists__child'
+              <div className='explore__items-containers__child'
                 key={index} >
                 {
                   isSelection && (
-                    <p className='explore__lists__child__title'>
+                    <p className='explore__items-containers__child__title'>
                       {selectedOption.collectionName}
                     </p>
                   )
