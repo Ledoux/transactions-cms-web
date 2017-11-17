@@ -4,7 +4,7 @@ import { Stream as withState } from 'transactions-cms-state'
 
 import CardDecorator from '../decorators/CardDecorator'
 
-const Stream = ({ cardDecoratorProps,
+const Stream = ({ cardDecorator,
   className,
   entities,
   force,
@@ -19,7 +19,7 @@ const Stream = ({ cardDecoratorProps,
             classnames('stream__element flex items-center justify-center', {
               'stream__element--selected': index === selectedIndex
             })} >
-            <CardDecorator entity={entity} {...cardDecoratorProps} />
+            <CardDecorator entity={entity} {...cardDecorator} />
           </div>
         ))
       }

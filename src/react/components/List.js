@@ -6,7 +6,7 @@ import ItemDecorator from '../decorators/ItemDecorator'
 
 const List = ({ collectionName,
   displayedLength,
-  itemDecoratorProps,
+  itemDecorator,
   entities,
   entityName,
   isMore,
@@ -28,7 +28,7 @@ const List = ({ collectionName,
               })}
               key={index}>
                 <ItemDecorator entity={entity}
-                  {...itemDecoratorProps}
+                  {...itemDecorator}
                   isLast={index === displayedLength - 1} />
             </div>
           )
@@ -42,7 +42,7 @@ const List = ({ collectionName,
               'list__child--small': isSmall
             })}
             key='more-item'>
-              <ItemDecorator {...itemDecoratorProps}
+              <ItemDecorator {...itemDecorator}
                 isLast
                 isSmall
                 text={`Precise your search if you want to find other matching ${collectionName}`} />

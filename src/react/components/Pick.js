@@ -3,10 +3,10 @@ import { Pick as withState } from 'transactions-cms-state'
 
 import CardDecorator from '../decorators/CardDecorator'
 
-export const Pick = ({ cardDecoratorProps }) => {
+export const Pick = ({ cardDecorator }) => {
   return (
     <div className='pick'>
-      <CardDecorator {...cardDecoratorProps} />
+      <CardDecorator {...cardDecorator} />
     </div>
   )
 }

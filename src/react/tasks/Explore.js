@@ -8,35 +8,28 @@ import List from '../components/List'
 
 const Explore = ({ control,
   isControl,
+  isEmpty,
+  isSelection,
   isShrinked,
   isSmall,
-  onExploreChange,
+  list,
   onSelectionClick,
   options,
-  state,
-  tag
+  tag,
+  toggledOptions
 }) => {
-  const { selectedIndexes } = state
-  const selectedOptions = selectedIndexes.map(selectedIndex =>
-    options[selectedIndex])
-  selectedOptions.sort((a, b) => a.collectionName - b.collectionName)
-  const isSelection = options && options.length > 1
-  const isEmpty = selectedOptions.length === 0
   return (
-    <div className='explore'>
+    <div className={`explore explore--${tag}`}>
       <div className={classnames('explore__control mt1', {
         'explore__control--shrinked': isShrinked
       })}>
-        <Control exploreState={state}
-          onExploreChange={onExploreChange}
-          options={selectedOptions}
-          tag={tag}
+        <Control options={toggledOptions}
           {...control} />
       </div>
       <div className='explore__collections flex flex-wrap'>
         {
           isSelection && options.map(({ collectionName }, index) => {
-            const isSelected = selectedIndexes.includes(index)
+            const isSelected = toggledIndexes.includes(index)
             return (
               <Button className={classnames('button button--alive explore__collections__child', {
                   'explore__collections__child--selected': isSelected
@@ -53,23 +46,19 @@ const Explore = ({ control,
         'explore__items-containers--shrinked': isShrinked
       })}>
         {
-          !isEmpty && selectedOptions.map((selectedOption, index) => {
+          !isEmpty && toggledOptions.map((selectedOption, index) => {
             return (
               <div className='explore__items-containers__child'
                 key={index} >
                 {
                   isSelection && (
-                    <p className='explore__items-containers__child__title'>
+                    <div className='explore__items-containers__child__title'>
                       {selectedOption.collectionName}
-                    </p>
+                    </div>
                   )
                 }
-                <List collectionName={selectedOption.collectionName}
-                  exploreState={state}
-                  isControl
-                  isShrinked={isShrinked}
-                  isSmall={isSmall}
-                  onExploreChange={onExploreChange}
+                <List {...list}
+                  collectionName={selectedOption.collectionName}
                   {...selectedOption} />
               </div>
             )
