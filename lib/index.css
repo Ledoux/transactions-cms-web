@@ -306,9 +306,7 @@ $xl: 75em !default;
   text-align: center; }
   .explore__control {
     margin-bottom: 1rem;
-    background-color: white;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+    margin-left: 0.25rem; }
     .explore__control--shrinked {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

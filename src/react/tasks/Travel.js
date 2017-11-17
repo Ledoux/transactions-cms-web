@@ -1,13 +1,13 @@
 import React from 'react'
+import { compose } from 'redux'
 import { Travel as withState } from 'transactions-cms-state'
 
-import Pick from '../components/Pick'
+import SlugPick from '../components/SlugPick'
 
-const Travel = ({ slug }) => {
-  console.log('slug', slug)
+const Travel = ({ pickProps }) => {
   return (
     <div className='travel'>
-      <Pick slug={slug} isTitle />
+      <SlugPick {...pickProps} />
     </div>
   )
 }

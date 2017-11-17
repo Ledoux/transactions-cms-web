@@ -16,7 +16,6 @@ const List = ({ collectionName,
   isSmall,
   maxDisplayCount
 }) => {
-  console.log('entities' ,entities, itemDecoratorProps)
   return (
     <div className={classnames('list', {
       'list--shrinked': isShrinked })}>

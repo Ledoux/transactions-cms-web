@@ -15,7 +15,6 @@ const ItemDecorator = props => {
     RightInteractionComponent,
     text
   } = props
-  console.log('AAA', content)
   return (
     <div className={classnames(className || `item-decorator item-decorator--${entityName}`, {
       'item-decorator--shrinked': isShrinked,

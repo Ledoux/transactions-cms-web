@@ -24,7 +24,7 @@ const Explore = ({ control,
   const isEmpty = selectedOptions.length === 0
   return (
     <div className='explore'>
-      <div className={classnames('explore__control', {
+      <div className={classnames('explore__control mt1', {
         'explore__control--shrinked': isShrinked
       })}>
         <Control exploreState={state}
