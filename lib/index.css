@@ -158,28 +158,6 @@ $xl: 75em !default;
       opacity: 1;
       transition: all 1s ease-out; }
 
-.admin-dashboard {
-  margin-left: 2.5%;
-  margin-right: 2.5%; }
-  @media (min-width: 1024px) {
-    .admin-dashboard {
-      margin-left: 10%;
-      margin-right: 10%; } }
-  .admin-dashboard__title {
-    border-bottom: 1px solid #dcdddc;
-    color: #777777;
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    padding-top: 0.5rem; }
-  .admin-dashboard__users {
-    margin-bottom: 1rem;
-    overflow-y: hidden; }
-    @media (min-width: 1024px) {
-      .admin-dashboard__users {
-        height: 40rem; } }
-
 .card-decorator {
   margin-left: 2.5%;
   margin-right: 2.5%; }
@@ -299,40 +277,40 @@ $xl: 75em !default;
 .content-page {
   margin-bottom: 2rem; }
 
-.explore {
+.explore-task {
   height: 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   text-align: center; }
-  .explore__control {
+  .explore-task__control {
     margin-bottom: 1rem;
     margin-left: 0.25rem; }
-    .explore__control--shrinked {
+    .explore-task__control--shrinked {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       margin-bottom: 0; }
-  .explore__collections {
+  .explore-task__collections {
     align-items: center;
     margin-bottom: 0.5rem; }
-    .explore__collections__child {
+    .explore-task__collections__child {
       background-color: white;
       color: #33aece;
       margin-right: 0.5rem; }
-      .explore__collections__child--selected {
+      .explore-task__collections__child--selected {
         background-color: #33aece;
         color: white; }
-  .explore__items-containers--shrinked {
+  .explore-task__items-containers--shrinked {
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
     z-index: 3000; }
-  .explore__items-containers__child {
+  .explore-task__items-containers__child {
     margin-bottom: 1rem; }
-    .explore__items-containers__child--shrinked {
+    .explore-task__items-containers__child--shrinked {
       margin-bottom: 0; }
-      .explore__items-containers__child--shrinked--last {
+      .explore-task__items-containers__child--shrinked--last {
         border-bottom-left-radius: 0.25rem;
         border-bottom-right-radius: 0.25rem; }
-    .explore__items-containers__child__title {
+    .explore-task__items-containers__child__title {
       border-bottom: 1px solid #dcdddc;
       color: #777777;
       font-family: font-family;
@@ -341,10 +319,10 @@ $xl: 75em !default;
       margin-bottom: 0.5rem;
       text-align: left; }
 
-.travel {
+.travel-task {
   padding-left: 2.5%;
   padding-right: 2.5%; }
   @media (min-width: 1024px) {
-    .travel {
+    .travel-task {
       padding-left: 5%;
       padding-right: 5%; } }

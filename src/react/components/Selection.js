@@ -1,14 +1,14 @@
 import React from 'react'
 
-import Explore from '../tasks/Explore'
+import ExploreTask from '../tasks/ExploreTask'
 
 const Selection = ({ selectedExplore,
   selectingExplore
 }) => {
   return (
     <div>
-      <Explore {...selectedExplore} />
-      <Explore {...selectingExplore} />
+      <ExploreTask {...selectedExplore} />
+      <ExploreTask {...selectingExplore} />
     </div>
   )
 }

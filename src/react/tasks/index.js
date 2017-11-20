@@ -1,6 +1,6 @@
-import Explore from './Explore'
-import Travel from './Travel'
+import ExploreTask from './ExploreTask'
+import TravelTask from './TravelTask'
 
-export { Explore,
-  Travel
+export { ExploreTask,
+  TravelTask
 }

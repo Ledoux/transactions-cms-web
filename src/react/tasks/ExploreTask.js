@@ -1,12 +1,12 @@
 import classnames from 'classnames'
 import React from 'react'
-import { Explore as withState } from 'transactions-cms-state'
+import { ExploreTask as withState } from 'transactions-cms-state'
 import { Button } from 'transactions-interface-web'
 
 import Control from '../components/Control'
 import List from '../components/List'
 
-const Explore = ({ control,
+const ExploreTask = ({ control,
   isControl,
   isEmpty,
   isSelection,
@@ -19,20 +19,20 @@ const Explore = ({ control,
   toggledOptions
 }) => {
   return (
-    <div className={`explore explore--${tag}`}>
-      <div className={classnames('explore__control mt1', {
-        'explore__control--shrinked': isShrinked
+    <div className={`explore-task explore-task--${tag}`}>
+      <div className={classnames('explore-task__control mt1', {
+        'explore-task__control--shrinked': isShrinked
       })}>
         <Control options={toggledOptions}
           {...control} />
       </div>
-      <div className='explore__collections flex flex-wrap'>
+      <div className='explore-task__collections flex flex-wrap'>
         {
           isSelection && options.map(({ collectionName }, index) => {
             const isSelected = toggledIndexes.includes(index)
             return (
-              <Button className={classnames('button button--alive explore__collections__child', {
-                  'explore__collections__child--selected': isSelected
+              <Button className={classnames('button button--alive explore-task__collections__child', {
+                  'explore-task__collections__child--selected': isSelected
                 })}
                 key={index}
                 onClick={() => onSelectionClick(index)} >
@@ -42,17 +42,17 @@ const Explore = ({ control,
           })
         }
       </div>
-      <div className={classnames('explore__items-containers', {
-        'explore__items-containers--shrinked': isShrinked
+      <div className={classnames('explore-task__items-containers', {
+        'explore-task__items-containers--shrinked': isShrinked
       })}>
         {
           !isEmpty && toggledOptions.map((selectedOption, index) => {
             return (
-              <div className='explore__items-containers__child'
+              <div className='explore-task__items-containers__child'
                 key={index} >
                 {
                   isSelection && (
-                    <div className='explore__items-containers__child__title'>
+                    <div className='explore-task__items-containers__child__title'>
                       {selectedOption.collectionName}
                     </div>
                   )
@@ -69,4 +69,4 @@ const Explore = ({ control,
   )
 }
 
-export default withState(Explore)
+export default withState(ExploreTask)
