@@ -2,21 +2,20 @@ import classnames from 'classnames'
 import React from 'react'
 import { TogglesForm as withState } from 'transactions-cms-state'
 
-const TogglesForm = props => {
-  const { isFrozen,
-    entities,
-    colIndexes,
-    ids,
-    onToggleClick,
-    title
-  } = props
+const TogglesForm = ({ isFrozen,
+  entities,
+  colIndexes,
+  onToggleClick,
+  selectedIds,
+  title
+}) => {
   return (
     <div className='toggles-form'>
       {
         title && (
-          <p className='toggles-form__title'>
+          <div className='toggles-form__title'>
             {title}
-          </p>
+          </div>
         )
       }
       {
@@ -28,7 +27,7 @@ const TogglesForm = props => {
                 colIndex * (entities.length/colIndexes.length),
                 (colIndex + 1) * (entities.length/colIndexes.length)
               ).map(({ id, label }, index) => {
-                const isSelected = ids && ids.includes(id)
+                const isSelected = selectedIds && selectedIds.includes(id)
                 return (
                   <div className={classnames(
                     'toggles-form__labels__item', {
@@ -43,8 +42,7 @@ const TogglesForm = props => {
                       disabled={isFrozen}
                       onClick={() => onToggleClick(id)}
                       readOnly
-                      type='checkbox'
-                    />
+                      type='checkbox' />
                     {label}
                   </div>
                 )

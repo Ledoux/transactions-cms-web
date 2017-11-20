@@ -4,10 +4,10 @@ import { TravelTask as withState } from 'transactions-cms-state'
 
 import SlugPick from '../components/SlugPick'
 
-const TravelTask = ({ pickProps }) => {
+const TravelTask = ({ slugPick }) => {
   return (
     <div className='travel-task'>
-      <SlugPick {...pickProps} />
+      <SlugPick {...slugPick} />
     </div>
   )
 }

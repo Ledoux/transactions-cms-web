@@ -1,3 +1,32 @@
 .radios-form {
-  
+  border-bottom: 1px solid $medium-grey;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+  overflow-y: hidden;
+  font-size: 14px;
+  padding-left: 5%;
+  &__title {
+    color: $light-font-color;
+    min-height: 1rem;
+    &__required {
+      color: $red;
+    }
+  }
+  &__values {
+    color: $dark-font-color;
+    font-weight: 500;
+    margin-left: 5%;
+    &__item {
+      margin-bottom: 1rem;
+      transition: all 0.4s ease-out;
+      &--selected {
+        color: $identity-color;
+        background-color: white;
+        opacity: 1;
+      }
+      &__input {
+        margin-right: 1rem;
+      }
+    }
+  }
 }

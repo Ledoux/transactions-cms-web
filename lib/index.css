@@ -237,6 +237,32 @@ $xl: 75em !default;
     .input-form__content__input:focus {
       outline: none; }
 
+.radios-form {
+  border-bottom: 1px solid #dcdddc;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+  overflow-y: hidden;
+  font-size: 14px;
+  padding-left: 5%; }
+  .radios-form__title {
+    color: #c5c5c5;
+    min-height: 1rem; }
+    .radios-form__title__required {
+      color: #DD2C00; }
+  .radios-form__values {
+    color: #4a4a4a;
+    font-weight: 500;
+    margin-left: 5%; }
+    .radios-form__values__item {
+      margin-bottom: 1rem;
+      transition: all 0.4s ease-out; }
+      .radios-form__values__item--selected {
+        color: #33aece;
+        background-color: white;
+        opacity: 1; }
+      .radios-form__values__item__input {
+        margin-right: 1rem; }
+
 .toggles-form {
   border-bottom: 1px solid #dcdddc;
   font-size: 14px;
