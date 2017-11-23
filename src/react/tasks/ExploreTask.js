@@ -4,7 +4,7 @@ import { ExploreTask as withState } from 'transactions-cms-state'
 import { Button } from 'transactions-interface-web'
 
 import Control from '../components/Control'
-import List from '../components/List'
+import List from '../containers/List'
 
 const ExploreTask = ({ control,
   isControl,

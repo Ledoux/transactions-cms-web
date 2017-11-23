@@ -1,6 +1,6 @@
 import { SlugPick as withState } from 'transactions-cms-state'
 
-import Pick from './Pick'
+import Pick from '../containers/Pick'
 
 const SlugPick = withState(Pick)
 
