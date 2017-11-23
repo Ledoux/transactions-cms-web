@@ -8,6 +8,7 @@ const ItemDecorator = props => {
     content,
     ContentComponent,
     entityName,
+    isEmpty,
     isLast,
     isShrinked,
     isSmall,
@@ -35,9 +36,9 @@ const ItemDecorator = props => {
         { ContentComponent && <ContentComponent {...content} /> }
         {
           text && (
-            <p className='item-decorator__content__text'>
+            <div className='item-decorator__content__text'>
               {text}
-            </p>
+            </div>
           )
         }
       </div>
