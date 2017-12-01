@@ -2,10 +2,13 @@ import classnames from 'classnames'
 import React from 'react'
 import { Stream as withState } from 'transactions-cms-state'
 
-const Stream = ({ className,
-  content,
-  ContentComponent,
+import CardDecorator from '../decorators/CardDecorator'
+
+const Stream = ({ cardDecorator,
+  className,
   entities,
+  force,
+  isBorder,
   selectedIndex
 }) => {
   return (
@@ -16,7 +19,7 @@ const Stream = ({ className,
             classnames('stream__element flex items-center justify-center', {
               'stream__element--selected': index === selectedIndex
             })} >
-            <ContentComponent {...entity} {...content} index={index} />
+            <CardDecorator entity={entity} {...cardDecorator} />
           </div>
         ))
       }

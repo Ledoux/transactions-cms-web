@@ -1,0 +1,16 @@
+.join-form {
+  &__content {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  &__replace {
+    background-color: white;
+    position: absolute;
+    z-index: 10000;
+    &--hidden {
+      display: none;
+    }
+  }
+}

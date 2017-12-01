@@ -1,6 +1,6 @@
-import Control from './Control'
+import ControlBar from './ControlBar'
 import SlugPick from './SlugPick'
 
-export { Control,
+export { ControlBar,
   SlugPick
 }

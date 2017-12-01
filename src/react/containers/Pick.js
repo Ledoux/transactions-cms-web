@@ -1,12 +1,13 @@
 import React from 'react'
 import { Pick as withState } from 'transactions-cms-state'
 
-import CardDecorator from '../decorators/CardDecorator'
-
-export const Pick = ({ cardDecorator }) => {
+export const Pick = ({ className,
+  content,
+  ContentComponent
+}) => {
   return (
-    <div className='pick'>
-      <CardDecorator {...cardDecorator} />
+    <div className={className || 'pick'}>
+      { ContentComponent && <ContentComponent {...content} /> }
     </div>
   )
 }

@@ -3,6 +3,9 @@
   width: 100%;
   position: relative;
   &__element {
+    border: 1px solid $light-grey;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
     height: 100%;
     opacity: 0;
     position: absolute;

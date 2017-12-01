@@ -1,10 +1,9 @@
+import classnames from 'classnames'
 import React from 'react'
 import DebounceInput from 'react-debounce-input'
 import { InputForm as withState } from 'transactions-cms-state'
 
 const InputForm = ({ className,
-  entity,
-  handleChangeValue,
   initialValue,
   isFrozen,
   isHTML,
@@ -13,19 +12,19 @@ const InputForm = ({ className,
   itemType,
   label,
   name,
+  onChangeValue,
   state,
   slug,
+  tag,
   value,
   valueItemProp
 }) => {
   if (typeof value !== 'string') {
     value = initialValue || ''
   }
-  const info = value === initialValue
-  ? '(FOUND)'
-  : (entity ? '(NEW FOUND)' : '(NEW)')
   return (
     <div className={ className || 'input-form' }
+      id={tag}
       itemProp={itemProp}
       itemScope={itemScope}
       itemType={itemType} >
@@ -33,7 +32,7 @@ const InputForm = ({ className,
         !isFrozen && (
           <div className='input-form__title'>
              <label className='input-form__title__label'>
-              {label} {info}
+              {label}
             </label>
           </div>
         )
@@ -55,11 +54,11 @@ const InputForm = ({ className,
             debounceTimeout={500}
             name={name}
             type='text'
-            onChange={event => handleChangeValue(event)}
+            onChange={onChangeValue}
             required
             value={value} />
       }
-    </div>
+      </div>
   </div>
   )
 }
