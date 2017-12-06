@@ -26,7 +26,7 @@
     .control__button:focus {
       outline: none; }
     .control__button svg {
-      fill: #33aece;
+      fill: #777777;
       height: 2rem;
       width: 2rem; }
   .control__input {
@@ -48,18 +48,18 @@
       outline: none; }
     .control__input::-webkit-input-placeholder {
       /* WebKit, Blink, Edge */
-      color: #c5c5c5; }
+      color: #dcdddc; }
     .control__input:-moz-placeholder {
       /* Mozilla Firefox 4 to 18 */
-      color: #c5c5c5;
+      color: #dcdddc;
       opacity: 1; }
     .control__input::-moz-placeholder {
       /* Mozilla Firefox 19+ */
-      color: #c5c5c5;
+      color: #dcdddc;
       opacity: 1; }
     .control__input:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: #c5c5c5; }
+      color: #dcdddc; }
 
 .list {
   text-align: center; }
@@ -88,7 +88,7 @@
   width: 100%;
   position: relative; }
   .stream__element {
-    border: 1px solid #fcfcfc;
+    border: 1px solid #c5c5c5;
     border-radius: 0.25rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     height: 100%;
@@ -108,7 +108,7 @@
       margin-left: 10%;
       margin-right: 10%; } }
   .card-decorator--border {
-    border: 1px solid #fcfcfc;
+    border: 1px solid #c5c5c5;
     border-radius: 0.25rem;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     width: 95%; }
@@ -121,7 +121,7 @@
 
 .item-decorator {
   background-color: white;
-  border: 1px solid #fcfcfc;
+  border: 1px solid #c5c5c5;
   border-radius: 0.25rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   min-height: 5rem;
@@ -132,7 +132,7 @@
   transition: all 0.4s ease-out; }
   .item-decorator--shrinked {
     border: 0;
-    border-bottom: 1px solid #fcfcfc;
+    border-bottom: 1px solid #c5c5c5;
     border-radius: 0;
     box-shadow: none; }
     .item-decorator--shrinked--last {
@@ -143,7 +143,7 @@
   .item-decorator__content {
     height: 100%; }
     .item-decorator__content__text {
-      color: #c5c5c5;
+      color: #dcdddc;
       font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
       font-size: 14px;
       font-weight: 500;
@@ -157,7 +157,7 @@
       right: 0;
       top: 0; } }
   .item-decorator__bottom-interaction {
-    border-top: 1px solid #fcfcfc; }
+    border-top: 1px solid #c5c5c5; }
 
 .input-form {
   margin-bottom: 0.5rem;
@@ -214,7 +214,7 @@
   font-size: 14px;
   padding-left: 5%; }
   .radios-form__title {
-    color: #c5c5c5;
+    color: #dcdddc;
     min-height: 1rem; }
     .radios-form__title__required {
       color: #DD2C00; }
@@ -226,7 +226,7 @@
       margin-bottom: 1rem;
       transition: all 0.4s ease-out; }
       .radios-form__values__item--selected {
-        color: #33aece;
+        color: #777777;
         background-color: white;
         opacity: 1; }
       .radios-form__values__item__input {
@@ -244,7 +244,7 @@
     .toggles-form {
       padding-left: 3%; } }
   .toggles-form__title {
-    color: #c5c5c5;
+    color: #dcdddc;
     margin-bottom: 1rem;
     width: 50%; }
   .toggles-form__labels {
@@ -255,7 +255,7 @@
       margin-bottom: 1rem;
       transition: all 0.4s ease-out; }
       .toggles-form__labels__item--selected {
-        color: #33aece;
+        color: #777777;
         background-color: white;
         opacity: 1; }
       .toggles-form__labels__item__input {
@@ -266,7 +266,7 @@
   border: 0; }
   .check-interaction svg {
     height: 1.5rem;
-    fill: #4a4a4a;
+    fill: #777777;
     width: 1.5rem; }
 
 .content-page {

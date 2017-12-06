@@ -20,15 +20,17 @@ const ControlBar = ({ className,
           <IconButton className={classnames(`button icon-button button--alive control__button`, {
             'control__button--small': isSmall
           })}
-          icon='plus'
-          onClick={handleAddContent} />
+            icon='plus'
+            onClick={handleAddContent}
+          />
         )
       }
       <IconButton className={classnames(`button icon-button button--alive control__button`, {
           'control__button--small': isSmall
         })}
         icon='magnifying_glass'
-        onClick={handleRequestContent} />
+        onClick={handleRequestContent}
+      />
       <input className={classnames(`control__input flex-auto`, {
           'control__input--small': isSmall,
           'control__input--add': isAdd
@@ -36,7 +38,8 @@ const ControlBar = ({ className,
         type='text'
         placeholder={placeholder}
         onChange={onChangeValue}
-        onKeyPress={onKeyPress} />
+        onKeyPress={onKeyPress}
+      />
     </div>
   )
 }

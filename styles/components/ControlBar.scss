@@ -26,7 +26,7 @@
     background: transparent;
     border: 0;
     border-radius: $border-radius;
-    color: $middle-font-color;
+    color: $dark-grey;
     padding-left: 0.5rem;
     &--small {
       width: auto;
@@ -38,18 +38,18 @@
       outline: none;
     }
     &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-      color: $light-font-color;
+      color: $medium-grey;
     }
     &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      color: $light-font-color;
+      color: $medium-grey;
       opacity:  1;
     }
     &::-moz-placeholder { /* Mozilla Firefox 19+ */
-      color: $light-font-color;
+      color: $medium-grey;
       opacity:  1;
     }
     &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: $light-font-color;
+      color: $medium-grey;
     }
     font-family: $font-family;
     font-weight: 500;

@@ -2,11 +2,11 @@ import classnames from 'classnames'
 import React from 'react'
 import { List as withState } from 'transactions-cms-state'
 
-const List = ({ content,
+const List = ({ collectionName,
+  content,
   ContentComponent,
   displayedLength,
   entities,
-  entityName,
   extraClass,
   getClass,
   getOn,
@@ -16,7 +16,7 @@ const List = ({ content,
   maxDisplayCount
 }) => {
   return (
-    <div className={classnames(`list list--${entityName}`, {
+    <div className={classnames(`list list--${collectionName}`, {
       'list--shrinked': isShrinked,
       [extraClass]: extraClass })}>
       {

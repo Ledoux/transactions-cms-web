@@ -3,13 +3,17 @@ import React from 'react'
 import { Stream as withState } from 'transactions-cms-state'
 
 const Stream = ({ className,
+  collectionName,
   content,
   ContentComponent,
   entities,
+  extraClass,
   selectedIndex
 }) => {
   return (
-    <div className={className || 'stream'}>
+    <div className={classnames(`stream stream--${collectionName}`, {
+      [extraClass]: extraClass
+    })}>
       {
         entities && entities.map((entity, index) => (
           <div key={index} className={

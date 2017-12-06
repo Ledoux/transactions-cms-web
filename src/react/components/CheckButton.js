@@ -10,7 +10,7 @@ const CheckInteraction = ({ entityName,
   if (isEdit) {
     href = `${href}?isEdit=true`
   }
-  return <IconButton className='button button--alive check-interaction'
+  return <IconButton className='button button--alive check-button'
     icon={
       icon || isEdit
       ? 'pen'

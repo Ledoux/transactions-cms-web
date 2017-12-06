@@ -44,10 +44,10 @@ const InputForm = ({ className,
           isHTML
           ? <div dangerouslySetInnerHTML={{ __html: value }} />
           : (
-              <p className='input-form__content__text'
+              <div className='input-form__content__text'
                 itemProp={valueItemProp} >
                 {value}
-              </p>
+              </div>
             )
         )
         : <DebounceInput className='input-form__content__input'

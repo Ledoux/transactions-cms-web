@@ -10,54 +10,79 @@ import ControlBar from '../components/ControlBar'
 const JoinForm = ({ activeClickListener,
   collectionName,
   content,
+  ContentComponent,
   contents,
   controlIndex,
   className,
-  divId,
+  elementId,
   explore,
   index,
   isFrozen,
-  ContentComponent,
+  onAddClick,
+  onDeleteClick,
+  onSetClick,
+  shortJoinKey,
   tag
 }) => {
-  let contentElements
+  const contentElements = []
   if (isFrozen) {
-    contentElements = content
-      ? [<ContentComponent key={0} {...content} />]
-      : contents && contents.map((content, index) =>
-        <ContentComponent key={index} {...content} />)
-  } else {
-    contentElements = content
-      ? [
-          <div className='join-form__content'
-            key={0}
-            onClick={() => activeClickListener(0)}
-          >
-            <ContentComponent {...content} />
-          </div>
-        ]
-      : contents && contents.map((content, index) => (
+    if (content) {
+      contentElements.push(
+        <ContentComponent key={0} {...content}/>
+      )
+    } else if (contents) {
+      contents.forEach((content, index) =>
+        contentElements.push(
+          <ContentComponent key={index} {...content} />
+        )
+      )
+    }
+  } else if (content) {
+    contentElements.push(
+      <div className='join-form__content'
+        key={0}
+        onClick={() => activeClickListener(0)}
+      >
+        <ContentComponent {...content} />
+      </div>
+    )
+  } else if (contents) {
+    contents.forEach((content, index) => {
+      contentElements.push(
         <div className='join-form__content'
           key={index}
           onClick={() => activeClickListener(index)}
         >
           <ContentComponent {...content} />
         </div>
-      ))
-    if (contentElements) {
-      contentElements.push(
-        <Portal node={document && document.getElementById(divId)} key='portal'>
-          <div className={classnames('join-form__replace', {
-            'join-form__replace--hidden': controlIndex === null
-          })}>
-            <ExploreTask {...explore} />
-          </div>
-        </Portal>
       )
-    }
+    })
+    contentElements.push(
+      <Button key='add' onClick={() => onAddClick(contents.length)} >
+        Add {shortJoinKey}
+      </Button>
+    )
+  } else {
+    contentElements.push(
+      <Button key='set' onClick={onSetClick}>
+        {shortJoinKey}
+      </Button>
+    )
   }
+  contentElements.push(
+    //<Portal node={document && document.getElementById(elementId)} key='portal'>
+      <div key='explore' className={classnames('join-form__replace', {
+        'join-form__replace--hidden': controlIndex === null
+      })}>
+        <Button onClick={onDeleteClick} >
+          Delete {shortJoinKey}
+        </Button>
+        <ExploreTask {...explore} />
+      </div>
+    //</Portal>
+  )
   return (
-    <div className={className || 'join-form'} id={divId}>
+    <div className={className || 'join-form'} id={elementId}>
       {contentElements}
     </div>
   )
