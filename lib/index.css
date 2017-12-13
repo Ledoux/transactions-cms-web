@@ -100,65 +100,6 @@
       opacity: 1;
       transition: all 1s ease-out; }
 
-.card-decorator {
-  margin-left: 2.5%;
-  margin-right: 2.5%; }
-  @media (min-width: 1024px) {
-    .card-decorator {
-      margin-left: 10%;
-      margin-right: 10%; } }
-  .card-decorator--border {
-    border: 1px solid #c5c5c5;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    width: 95%; }
-    @media (min-width: 425px) {
-      .card-decorator--border {
-        width: 65%; } }
-    @media (min-width: 1024px) {
-      .card-decorator--border {
-        width: 92.5%; } }
-
-.item-decorator {
-  background-color: white;
-  border: 1px solid #c5c5c5;
-  border-radius: 0.25rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  min-height: 5rem;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease-out; }
-  .item-decorator--shrinked {
-    border: 0;
-    border-bottom: 1px solid #c5c5c5;
-    border-radius: 0;
-    box-shadow: none; }
-    .item-decorator--shrinked--last {
-      border-bottom-left-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem; }
-  .item-decorator--small {
-    min-height: 0; }
-  .item-decorator__content {
-    height: 100%; }
-    .item-decorator__content__text {
-      color: #dcdddc;
-      font-family: "Raleway", "Helvetica Neue", Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      width: 90%;
-      margin: auto; }
-  @media (min-width: 1024px) {
-    .item-decorator__right-interaction {
-      border-top: 0;
-      bottom: 0;
-      position: absolute;
-      right: 0;
-      top: 0; } }
-  .item-decorator__bottom-interaction {
-    border-top: 1px solid #c5c5c5; }
-
 .input-form {
   margin-bottom: 0.5rem;
   position: relative; }
@@ -260,14 +201,6 @@
         opacity: 1; }
       .toggles-form__labels__item__input {
         margin-right: 1rem; }
-
-.check-interaction {
-  background: transparent;
-  border: 0; }
-  .check-interaction svg {
-    height: 1.5rem;
-    fill: #777777;
-    width: 1.5rem; }
 
 .content-page {
   margin-bottom: 2rem; }
