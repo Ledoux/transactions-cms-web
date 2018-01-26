@@ -12,16 +12,14 @@ const JoinForm = ({ activeClickListener,
   content,
   ContentComponent,
   contents,
-  controlIndex,
   className,
   elementId,
   explore,
   index,
   isFrozen,
-  onAddClick,
   onDeleteClick,
-  onSetClick,
   shortJoinKey,
+  showModal,
   tag
 }) => {
   const contentElements = []
@@ -37,50 +35,57 @@ const JoinForm = ({ activeClickListener,
         )
       )
     }
-  } else if (content) {
-    contentElements.push(
-      <div className='join-form__content'
-        key={0}
-        onClick={() => activeClickListener(0)}
-      >
-        <ContentComponent {...content} />
+  } else {
+    const ExploreComponent = joinIndex => (
+      <div key='explore' className='join-form__replace'>
+        <Button onClick={onDeleteClick} >
+          Delete {shortJoinKey}
+        </Button>
+        <ExploreTask {...explore} extraOn={{ joinIndex }} />
       </div>
     )
-  } else if (contents) {
-    contents.forEach((content, index) => {
+    const exploreConfig = {
+      isCornerCloseButton: true,
+      isOutCloseButton: true
+    }
+    if (content) {
+      // switch Click
       contentElements.push(
         <div className='join-form__content'
-          key={index}
-          onClick={() => activeClickListener(index)}
+          key={0}
+          onClick={() => showModal(ExploreComponent(0), exploreConfig)}
         >
           <ContentComponent {...content} />
         </div>
       )
-    })
-    contentElements.push(
-      <Button key='add' onClick={() => onAddClick(contents.length)} >
-        Add {shortJoinKey}
-      </Button>
-    )
-  } else {
-    contentElements.push(
-      <Button key='set' onClick={onSetClick}>
-        {shortJoinKey}
-      </Button>
-    )
-  }
-  contentElements.push(
-    //<Portal node={document && document.getElementById(elementId)} key='portal'>
-      <div key='explore' className={classnames('join-form__replace', {
-        'join-form__replace--hidden': controlIndex === null
-      })}>
-        <Button onClick={onDeleteClick} >
-          Delete {shortJoinKey}
+    } else if (contents) {
+      // switch Click
+      contents.forEach((content, index) => {
+        contentElements.push(
+          <div className='join-form__content'
+            key={index}
+            onClick={() => showModal(ExploreComponent(index), exploreConfig)}
+          >
+            <ContentComponent {...content} />
+          </div>
+        )
+      })
+      // add Click
+      contentElements.push(
+        <Button key='add' onClick={() =>
+          showModal(ExploreComponent(contentElements.length), exploreConfig)} >
+          Add {shortJoinKey}
         </Button>
-        <ExploreTask {...explore} />
-      </div>
-    //</Portal>
-  )
+      )
+    } else {
+      contentElements.push(
+        <Button key='set' onClick={() =>
+          showModal(ExploreComponent(0), exploreConfig)}>
+          {shortJoinKey}
+        </Button>
+      )
+    }
+  }
   return (
     <div className={className || 'join-form'} id={elementId}>
       {contentElements}

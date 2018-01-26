@@ -6,9 +6,7 @@
     }
   }
   &__replace {
-    background-color: white;
-    position: absolute;
-    z-index: 10000;
+    height: 80vh;
     &--hidden {
       display: none;
     }

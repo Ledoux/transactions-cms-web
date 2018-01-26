@@ -8,9 +8,9 @@
   padding-right: 1.5rem;
   transition: all 0.4s ease-out; }
 
-.control {
+.control-bar {
   height: 3rem; }
-  .control__button {
+  .control-bar__button {
     background: transparent;
     border: 0;
     border-radius: 0.25rem;
@@ -18,18 +18,18 @@
     height: 100%;
     transition: all 0.4s ease-out; }
     @media (min-width: 1024px) {
-      .control__button {
+      .control-bar__button {
         width: 8.33333%; } }
     @media (min-width: 1024px) {
-      .control__button--small {
+      .control-bar__button--small {
         width: 16.66667%; } }
-    .control__button:focus {
+    .control-bar__button:focus {
       outline: none; }
-    .control__button svg {
+    .control-bar__button svg {
       fill: #777777;
       height: 2rem;
       width: 2rem; }
-  .control__input {
+  .control-bar__input {
     background: transparent;
     border: 0;
     border-radius: 0.25rem;
@@ -39,25 +39,25 @@
     font-weight: 500;
     height: 100%;
     font-size: 14px; }
-    .control__input--small {
+    .control-bar__input--small {
       width: auto; }
       @media (min-width: 1024px) {
-        .control__input--small {
+        .control-bar__input--small {
           padding-left: 0; } }
-    .control__input:focus {
+    .control-bar__input:focus {
       outline: none; }
-    .control__input::-webkit-input-placeholder {
+    .control-bar__input::-webkit-input-placeholder {
       /* WebKit, Blink, Edge */
       color: #dcdddc; }
-    .control__input:-moz-placeholder {
+    .control-bar__input:-moz-placeholder {
       /* Mozilla Firefox 4 to 18 */
       color: #dcdddc;
       opacity: 1; }
-    .control__input::-moz-placeholder {
+    .control-bar__input::-moz-placeholder {
       /* Mozilla Firefox 19+ */
       color: #dcdddc;
       opacity: 1; }
-    .control__input:-ms-input-placeholder {
+    .control-bar__input:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
       color: #dcdddc; }
 
@@ -141,9 +141,7 @@
     opacity: 0.5; }
 
 .join-form__replace {
-  background-color: white;
-  position: absolute;
-  z-index: 10000; }
+  height: 80vh; }
   .join-form__replace--hidden {
     display: none; }
 

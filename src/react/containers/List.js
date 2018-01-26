@@ -8,6 +8,7 @@ const List = ({ collectionName,
   displayedLength,
   entities,
   extraClass,
+  extraOn,
   getClass,
   getOn,
   isNotTotal,
@@ -27,7 +28,7 @@ const List = ({ collectionName,
                 'list__child--small': isSmall
               }, getClass && getClass(entity, index))}
               key={index}
-              {...getOn && getOn(entity, index)} >
+              {...getOn && getOn(entity, index, extraOn)} >
                 <ContentComponent {...content}
                   {...entity}
                   index={index}

@@ -1,0 +1,9 @@
+.join-form__content {
+  cursor: pointer; }
+  .join-form__content:hover {
+    opacity: 0.5; }
+
+.join-form__replace {
+  height: 80vh; }
+  .join-form__replace--hidden {
+    display: none; }
