@@ -4,15 +4,11 @@ import { Button,
   Icon
 } from 'transactions-interface-web'
 
-const EditButton = ({ pathname,
-  push
-}) => {
+const EditButton = ({ onClick }) => {
   return  (
     <Button
       className={`button button--alive edit-button`}
-      onClick={() => {
-        push(`${pathname}?isEdit=true`)
-      }}
+      onClick={onClick}
     >
       <Icon className='icon edit-button__icon' icon='pen' />
     </Button>

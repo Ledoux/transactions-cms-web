@@ -38,7 +38,7 @@ const JoinForm = ({ activeClickListener,
   } else {
     const ExploreComponent = joinIndex => (
       <div key='explore' className='join-form__replace'>
-        <Button onClick={onDeleteClick} >
+        <Button onClick={() => onDeleteClick(joinIndex)} >
           Delete {shortJoinKey}
         </Button>
         <ExploreTask {...explore} extraOn={{ joinIndex }} />
@@ -73,7 +73,7 @@ const JoinForm = ({ activeClickListener,
       // add Click
       contentElements.push(
         <Button key='add' onClick={() =>
-          showModal(ExploreComponent(contentElements.length), exploreConfig)} >
+          showModal(ExploreComponent(contents.length), exploreConfig)} >
           Add {shortJoinKey}
         </Button>
       )
